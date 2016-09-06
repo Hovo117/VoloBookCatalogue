@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BooksEntityDAL.Books>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PagesCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AttributeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Countries.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Images.ImageSource)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PagesCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AttributeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Countries.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Images.ImageSource)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BookID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BookID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BookID })
+        </td>
+    </tr>
+}
+
+</table>
