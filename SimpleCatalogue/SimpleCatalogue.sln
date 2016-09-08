@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogueMVC", "CatalogueMVC\CatalogueMVC.csproj", "{E69B5938-9CCB-442E-A3F2-FE401A7F8B43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksEntitiesDAL", "BooksEntitiesDAL\BooksEntitiesDAL.csproj", "{DC018182-A019-41E7-B500-C1CD27DF5A32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E69B5938-9CCB-442E-A3F2-FE401A7F8B43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E69B5938-9CCB-442E-A3F2-FE401A7F8B43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E69B5938-9CCB-442E-A3F2-FE401A7F8B43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E69B5938-9CCB-442E-A3F2-FE401A7F8B43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC018182-A019-41E7-B500-C1CD27DF5A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC018182-A019-41E7-B500-C1CD27DF5A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC018182-A019-41E7-B500-C1CD27DF5A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC018182-A019-41E7-B500-C1CD27DF5A32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

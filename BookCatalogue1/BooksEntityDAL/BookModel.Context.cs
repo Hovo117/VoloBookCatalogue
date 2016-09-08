@@ -14,6 +14,7 @@ namespace BooksEntityDAL
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
+    using BooksEntityDAL;
     
     public partial class BookStoreMVCEntities : DbContext
     {
@@ -24,7 +25,9 @@ namespace BooksEntityDAL
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            modelBuilder.Entity<Books>()
+                             .HasMany(parent => parent.Book_Author)
+                             .WithMany();
         }
     
         public virtual DbSet<Attribute_Book> Attribute_Book { get; set; }

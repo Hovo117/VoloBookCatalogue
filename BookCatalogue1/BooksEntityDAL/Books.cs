@@ -27,8 +27,8 @@ namespace BooksEntityDAL
         public int CountryID { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
-        public Nullable<int> PagesCount { get; set; }
-        public Nullable<int> ImageID { get; set; }
+        public int? PagesCount { get; set; }
+        public int? ImageID { get; set; }
         public int AttributeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
