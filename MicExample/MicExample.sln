@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogueMVC", "CatalogueMVC\CatalogueMVC.csproj", "{D197F298-908A-4DAF-A522-BCDC482752EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksDAL", "BooksDAL\BooksDAL.csproj", "{E4DF9071-208A-4DC9-83C9-BCD217A01E67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D197F298-908A-4DAF-A522-BCDC482752EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D197F298-908A-4DAF-A522-BCDC482752EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D197F298-908A-4DAF-A522-BCDC482752EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D197F298-908A-4DAF-A522-BCDC482752EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4DF9071-208A-4DC9-83C9-BCD217A01E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DF9071-208A-4DC9-83C9-BCD217A01E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DF9071-208A-4DC9-83C9-BCD217A01E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DF9071-208A-4DC9-83C9-BCD217A01E67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
