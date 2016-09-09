@@ -11,6 +11,7 @@ namespace BooksDAL
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Authors
     {
@@ -21,6 +22,7 @@ namespace BooksDAL
         }
     
         public int AuthorID { get; set; }
+        [Required]
         public string FullName { get; set; }
         public System.DateTime BirthDate { get; set; }
     

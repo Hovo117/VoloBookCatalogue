@@ -11,6 +11,7 @@ namespace BooksDAL
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Countries
     {
@@ -21,7 +22,9 @@ namespace BooksDAL
         }
     
         public int CountryID { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public int TelCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

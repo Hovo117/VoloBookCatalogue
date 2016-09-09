@@ -11,6 +11,7 @@ namespace BooksDAL
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Books
     {
@@ -21,9 +22,13 @@ namespace BooksDAL
         }
     
         public int BookID { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public int AuthorID { get; set; }
+        [Required]
         public int CountryID { get; set; }
+        [Required]
         public string Price { get; set; }
         public string Description { get; set; }
         public Nullable<int> PagesCount { get; set; }
