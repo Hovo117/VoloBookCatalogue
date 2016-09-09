@@ -16,28 +16,28 @@ namespace CatalogueMVC.Controllers
         private SimpleBookCatalogueEntities db = new SimpleBookCatalogueEntities();
 
         // GET: Books
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder , int p = 0)
         {
             ViewBag.TitleSort = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-            ViewBag.PriceSort = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewBag.PriceSort = p;
+
             var books = from s in db.Books
-                           select s;
+                        select s;
+
             switch (sortOrder)
             {
                 case "title_desc":
                     books = books.OrderByDescending(s => s.Title);
                     break;
-                case "Price":
-                    books = books.OrderBy(s => s.Price);
-                    break;
-                case "Price_desc":
-                    books = books.OrderByDescending(s => s.Price);
-                    break;
                 default:
                     books = books.OrderBy(s => s.Title);
                     break;
             }
+           
+
             return View(books.ToList());
+
+
         }
 
         // GET: Books/Details/5
