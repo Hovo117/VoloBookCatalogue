@@ -20,6 +20,7 @@ namespace CatalogueMVC.Controllers
         public async Task<ActionResult> Index()
         {
             var books = db.Books.Include(b => b.Author).Include(b => b.Country).Include(b => b.Image);
+            
             return View(await books.ToListAsync());
         }
 
