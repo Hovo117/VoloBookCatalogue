@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
-using System.ComponentModel.DataAnnotations;
+
 
 namespace CatalogueMVC.Controllers
 {
@@ -96,6 +96,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Authors/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)

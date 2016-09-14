@@ -8,7 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
-using System.ComponentModel.DataAnnotations;
 
 namespace CatalogueMVC.Controllers
 {
@@ -50,7 +49,7 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CountryID,Name,TelCode")] Country country)
+        public async Task<ActionResult> Create([Bind(Include = "CountryID,Country1,TelCode")] Country country)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CountryID,Name,TelCode")] Country country)
+        public async Task<ActionResult> Edit([Bind(Include = "CountryID,Country1,TelCode")] Country country)
         {
             if (ModelState.IsValid)
             {

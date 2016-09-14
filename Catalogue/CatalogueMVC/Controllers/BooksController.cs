@@ -8,7 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
-using System.ComponentModel.DataAnnotations;
 
 namespace CatalogueMVC.Controllers
 {
@@ -43,7 +42,7 @@ namespace CatalogueMVC.Controllers
         public ActionResult Create()
         {
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName");
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Name");
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1");
             return View();
         }
 
@@ -63,7 +62,7 @@ namespace CatalogueMVC.Controllers
             }
 
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Name", book.CountryID);
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
             return View(book);
         }
 
@@ -81,7 +80,7 @@ namespace CatalogueMVC.Controllers
                 return HttpNotFound();
             }
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Name", book.CountryID);
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
             return View(book);
         }
 
@@ -100,7 +99,7 @@ namespace CatalogueMVC.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Name", book.CountryID);
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
             return View(book);
         }
 

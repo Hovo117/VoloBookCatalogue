@@ -12,7 +12,7 @@ namespace BooksEntitiesDAL
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Country
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +22,9 @@ namespace BooksEntitiesDAL
         }
     
         public int CountryID { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Field Country must be filled")]
+        public string Country1 { get; set; }
+        [Required(ErrorMessage = "Field Tel. Code must be filled")]
         public int TelCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

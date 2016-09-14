@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8965fce67eb485b98a93a153986b8a6" Name="Diagram1">
+      <Diagram DiagramId="6fcf7efc6f4649c18f2b4a9e96514b3b" Name="Diagram1">
         <EntityTypeShape EntityType="BooksCatalogueDBModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BooksCatalogueDBModel.AspNetRole" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="BooksCatalogueDBModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />

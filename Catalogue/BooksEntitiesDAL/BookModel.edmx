@@ -99,17 +99,17 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AuthorID" Type="int" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
-          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
           <Property Name="PagesCount" Type="int" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
             <PropertyRef Name="CountryID" />
           </Key>
           <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TelCode" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Attribute_Book_Attributes">
@@ -362,10 +362,10 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PagesCount" Type="Int32" />
-          <Property Name="Picture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Attribute_Book" Relationship="Self.FK_Attribute_Book_Books" FromRole="Books" ToRole="Attribute_Book" />
           <NavigationProperty Name="Author" Relationship="Self.FK_Books_Authors" FromRole="Books" ToRole="Authors" />
           <NavigationProperty Name="Country" Relationship="Self.FK_Books_Countries" FromRole="Books" ToRole="Countries" />
@@ -375,7 +375,7 @@
             <PropertyRef Name="CountryID" />
           </Key>
           <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TelCode" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Books" Relationship="Self.FK_Books_Countries" FromRole="Countries" ToRole="Books" />
         </EntityType>
@@ -606,7 +606,7 @@
             <EntityTypeMapping TypeName="BooksCatalogueDBModel.Country">
               <MappingFragment StoreEntitySet="Countries">
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country1" ColumnName="Country" />
                 <ScalarProperty Name="TelCode" ColumnName="TelCode" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2226EC04-9560-4DE5-ACCA-F9B9A3B3E01E}</ProjectGuid>
+    <ProjectGuid>{E8579AF2-28E3-4D8A-94F3-C85A2C131DF2}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -257,12 +257,7 @@
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BooksEntitiesDAL\BooksEntitiesDAL.csproj">
-      <Project>{66f55455-4905-48f2-b9c1-8021618a92ed}</Project>
-      <Name>BooksEntitiesDAL</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -270,6 +265,12 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BooksEntitiesDAL\BooksEntitiesDAL.csproj">
+      <Project>{417c45c5-9b3f-47dd-a504-3c44fd96360e}</Project>
+      <Name>BooksEntitiesDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -287,7 +288,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>5066</DevelopmentServerPort>
+          <DevelopmentServerPort>4681</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:5066/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

@@ -12,7 +12,7 @@ namespace BooksEntitiesDAL
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Author
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +22,9 @@ namespace BooksEntitiesDAL
         }
     
         public int AuthorID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Field Full Name must be filled")]
         public string FullName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Field BirthDate must be filled")]
         public System.DateTime BirthDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
