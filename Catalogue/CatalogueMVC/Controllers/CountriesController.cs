@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
+using System.ComponentModel.DataAnnotations;
 
 namespace CatalogueMVC.Controllers
 {
@@ -37,6 +38,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Countries/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -45,6 +47,7 @@ namespace CatalogueMVC.Controllers
         // POST: Countries/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CountryID,Name,TelCode")] Country country)
@@ -60,6 +63,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Countries/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,6 +81,7 @@ namespace CatalogueMVC.Controllers
         // POST: Countries/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "CountryID,Name,TelCode")] Country country)
@@ -91,6 +96,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Countries/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -106,6 +112,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Countries/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
