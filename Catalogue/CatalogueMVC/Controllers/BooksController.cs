@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
+using System.IO;
 
 namespace CatalogueMVC.Controllers
 {
@@ -52,10 +53,19 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book)
+        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file !=null && file.ContentLength > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
+                    var path = Path.Combine(targetFolder, fileName);
+                    book.Picture = path;
+                    file.SaveAs(path);
+                }
+                
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

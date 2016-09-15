@@ -258,7 +258,7 @@
     <Content Include="Views\Countries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Images\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
