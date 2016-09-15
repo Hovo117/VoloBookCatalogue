@@ -60,16 +60,17 @@ namespace CatalogueMVC.Controllers
                 if (file !=null && file.ContentLength > 0)
                 {
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
-                    var path = Path.Combine(targetFolder, fileName);
-                    book.Picture = path;
+                    //var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
+                    book.Picture = fileName;
                 }
-                
+
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            
 
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
             ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
@@ -77,6 +78,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Books/Edit/5
+
         [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
