@@ -102,10 +102,19 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book)
+        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book , HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.ContentLength > 0)
+                {
+                    //book.Picture = "";
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    //var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                    file.SaveAs(path);
+                    book.Picture = fileName;
+                }
                 db.Entry(book).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -138,10 +147,54 @@ namespace CatalogueMVC.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Book book = await db.Books.FindAsync(id);
+
+            //var fileName = Path.GetFileName(book.Picture);
+            //var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+            //if (System.IO.File.Exists(path))
+            //{
+            //    System.IO.File.Delete(path);
+            //}
+
             db.Books.Remove(book);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        //[HttpPost]
+        //public JsonResult DeleteFile(string id)
+        //{
+
+        //    if (String.IsNullOrEmpty(id))
+        //    {
+        //        Response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //        return Json(new { Result = "Error" });
+        //    }
+        //    try
+        //    {
+        //        FileDetail fileDetail = db.Books.Find();
+        //        if (fileDetail == null)
+        //        {
+        //            Response.StatusCode = (int)HttpStatusCode.NotFound;
+        //            return Json(new { Result = "Error" });
+        //        }
+
+        //        //Remove from database
+        //        db.Books.Remove(fileDetail);
+        //        db.SaveChanges();
+
+        //        //Delete file from the file system
+        //        var path = Path.Combine(Server.MapPath("~/Images/"), fileDetail.Id + fileDetail.Extension);
+        //        if (System.IO.File.Exists(path))
+        //        {
+        //            System.IO.File.Delete(path);
+        //        }
+        //        return Json(new { Result = "OK" });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { Result = "ERROR", Message = ex.Message });
+        //    }
+        //}
 
         protected override void Dispose(bool disposing)
         {

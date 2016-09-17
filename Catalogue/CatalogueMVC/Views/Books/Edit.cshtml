@@ -3,6 +3,29 @@
 @{
     ViewBag.Title = "Edit";
 }
+<script>
+    $('.deleteItem').click(function (e) {
+        e.preventDefault();
+        var $ctrl = $(this);
+        if (confirm('Do you really want to delete this file?')) {
+            $.ajax({
+                url: '@Url.Action("DeleteFile")',
+                type: 'POST',
+                data: { id: $(this).data('id') }
+            }).done(function (data) {
+                if (data.Result == "OK") {
+                    $ctrl.closest('dt').remove();
+                }
+                else if (data.Result.Message) {
+                    alert(data.Result.Message);
+                }
+            }).fail(function () {
+                alert("There is something wrong. Please try again.");
+            })
+
+        }
+    });
+</script>
 
 <h2>Edit</h2>
 
@@ -10,7 +33,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Book</h4>
         <hr />
@@ -58,7 +81,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PagesCount,"Pages", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PagesCount, "Pages", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PagesCount, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PagesCount, "", new { @class = "text-danger" })
@@ -68,9 +91,23 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/Images/@Model.Picture" alt="Img width="100" height="150" />
+
+                @*<ul class="attachment">*@
+                <dt>
+                    <a class="title" href="~/Images/@Model.Picture">@Model.Picture</a>
+                    <a href="javascript:void(0);" data-id="@Model.BookID" class="deleteItem">Delete</a>
+                </dt>
+                @*</ul>*@
+
+                <input type="file" name="file" id="file" />
+
+
+
+
+
+                @*<img src="~/Images/@Model.Picture" alt="Img width="100" height="150" />*@
                 @*@Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })*@
+                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })*@
             </div>
         </div>
 

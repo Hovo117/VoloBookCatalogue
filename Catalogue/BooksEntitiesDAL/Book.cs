@@ -29,6 +29,7 @@ namespace BooksEntitiesDAL
         [Required(ErrorMessage = "Field Country must be filled")]
         public int CountryID { get; set; }
         [Required(ErrorMessage = "Field Price must be filled")]
+        [DisplayFormat(DataFormatString = "{0:0.###}")]
         public decimal Price { get; set; }
         public string Description { get; set; }
         public Nullable<int> PagesCount { get; set; }
