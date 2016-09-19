@@ -22,9 +22,12 @@ namespace BooksEntitiesDAL
         }
     
         public int AuthorID { get; set; }
-        [Required(ErrorMessage ="Field Full Name must be filled")]
+
+        [Required(ErrorMessage ="The field Full Name must be filled in")]
+        [Display(Name ="Full Name")]
         public string FullName { get; set; }
-        [Required(ErrorMessage = "Field BirthDate must be filled")]
+
+
         public System.DateTime BirthDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

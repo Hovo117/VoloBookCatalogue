@@ -106,8 +106,8 @@ namespace CatalogueMVC.Controllers
             var pic = book.Picture;
             if (ModelState.IsValid)
             {
-                
-                if (file != null && file.ContentLength > 0 )
+
+                if (file != null && file.ContentLength > 0)
                 {
                     if (book.Picture != null)
                     {
