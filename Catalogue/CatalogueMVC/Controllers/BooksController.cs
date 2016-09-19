@@ -60,7 +60,6 @@ namespace CatalogueMVC.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    //var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
@@ -104,28 +103,23 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
+            var pic = book.Picture;
             if (ModelState.IsValid)
             {
-                //var oldFileName = Path.GetFileName(book.Picture);
-                //var oldPath = Path.Combine(Server.MapPath("~/Images"), book.Picture);
-                //if (System.IO.File.Exists(oldPath))
-                //{
-                //    System.IO.File.Delete(oldPath);
-                //}
-
-                if (file != null && file.ContentLength > 0)
+                
+                if (file != null && file.ContentLength > 0 )
                 {
-                    //System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), book.Picture));
+                    if (book.Picture != null)
+                    {
+                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), book.Picture));
+                    }
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    //var targetFolder = System.Web.HttpContext.Current.Server.MapPath("~/Images");
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
                 }
-                //else
-                //{
-                //    book.Picture = path;
-                //}
+
+
                 db.Entry(book).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -173,7 +167,7 @@ namespace CatalogueMVC.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
