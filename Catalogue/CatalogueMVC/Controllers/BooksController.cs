@@ -38,6 +38,8 @@ namespace CatalogueMVC.Controllers
             return View(book);
         }
 
+        const string _noImage = "no-image.png";
+
         // GET: Books/Create
         [Authorize]
         public ActionResult Create()
@@ -63,6 +65,10 @@ namespace CatalogueMVC.Controllers
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
+                }
+                else
+                {
+                    book.Picture = _noImage;
                 }
 
                 db.Books.Add(book);
@@ -103,22 +109,21 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            var pic = book.Picture;
+            book = await db.Books.FindAsync(book.BookID);
             if (ModelState.IsValid)
             {
-
                 if (file != null && file.ContentLength > 0)
                 {
-                    if (book.Picture != null)
+                    if (book.Picture != _noImage)
                     {
                         System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), book.Picture));
                     }
+                    
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
                 }
-
 
                 db.Entry(book).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -153,7 +158,7 @@ namespace CatalogueMVC.Controllers
         {
             Book book = await db.Books.FindAsync(id);
 
-            if (book.Picture != null)
+            if (book.Picture != null && book.Picture != _noImage)
             {
                 var fileName = Path.GetFileName(book.Picture);
                 var path = Path.Combine(Server.MapPath("~/Images"), fileName);
