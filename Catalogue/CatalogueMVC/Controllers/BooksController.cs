@@ -20,7 +20,23 @@ namespace CatalogueMVC.Controllers
         public async Task<ActionResult> Index()
         {
             var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    books = books.Where(s => s.Title.Contains(searchString)
+            //                           /*|| .AuthorID.Contains(searchString)*/);
+            //}
             return View(await books.ToListAsync());
+        }
+
+        public ActionResult SearchBook(string keyword)
+        {
+            var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
+            }
+            return View(books.ToList());
         }
 
         // GET: Books/Details/5

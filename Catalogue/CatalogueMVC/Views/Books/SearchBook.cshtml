@@ -1,0 +1,71 @@
+﻿@model IEnumerable<BooksEntitiesDAL.Book>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PagesCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>  
+@foreach (var item in Model)
+{
+    
+    <tr class="table">
+        <td>
+            @if (@item.Picture != null)
+                {
+                <img src="~/Images/@item.Picture" width="100" height="150" alt="img" />
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.Country1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PagesCount)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+        </td>
+    </tr>
+        
+}
+</tbody>
+
+</table>
