@@ -275,6 +275,7 @@
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Views\Books\SearchBook.cshtml" />
+    <Content Include="Views\Books\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -21,10 +21,10 @@
 @using (Ajax.BeginForm("SearchBook", options))
 {
     <div>
-        @Html.TextBox("keyword")
-        <button type="submit">Search</button>
+        @Html.TextBox("keyword",null,htmlAttributes: new { @placeholder="Search by Title or Author", size = "40" , type = "text" })
+        <button type="submit" style="display:none">Search</button>
     </div>
-    <div id="divLoading" style="width: 200px; fontsize: larger; display: none; position: absolute;">
+    <div id="divLoading" style="width: 200px; display: none; position: absolute;">
         Loading ....
     </div>
 }

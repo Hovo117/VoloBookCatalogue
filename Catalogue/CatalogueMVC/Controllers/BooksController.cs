@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using BooksEntitiesDAL;
 using System.IO;
+using System.ComponentModel.DataAnnotations;
 
 namespace CatalogueMVC.Controllers
 {
@@ -19,24 +20,25 @@ namespace CatalogueMVC.Controllers
         // GET: Books
         public async Task<ActionResult> Index()
         {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+            //var books = db.Books.Include(b => b.Author).Include(b => b.Country);
 
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    books = books.Where(s => s.Title.Contains(searchString)
-            //                           /*|| .AuthorID.Contains(searchString)*/);
-            //}
-            return View(await books.ToListAsync());
+            return View(/*await books.ToListAsync()*/);
         }
 
-        public ActionResult SearchBook(string keyword)
+        public ActionResult SearchBook([StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]string keyword)
         {
             var books = db.Books.Include(b => b.Author).Include(b => b.Country);
             if (!string.IsNullOrEmpty(keyword))
             {
                 books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
             }
+           
             return View(books.ToList());
+        }
+
+        public ActionResult NotFound()
+        {
+            return View();
         }
 
         // GET: Books/Details/5
