@@ -30,7 +30,7 @@ namespace CatalogueMVC.Controllers
             return View(/*await books.ToListAsync()*/);
         }
 
-        public ActionResult SearchBook(/*[StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]*/string keyword)
+        public ActionResult SearchBook([StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]string keyword)
         {
             var books = db.Books.Include(b => b.Author).Include(b => b.Country);
             if (!string.IsNullOrEmpty(keyword))
@@ -98,7 +98,7 @@ namespace CatalogueMVC.Controllers
                 {
                     book.Picture = _noImage;
                 }
-
+                book.Price = 0.0M;
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
