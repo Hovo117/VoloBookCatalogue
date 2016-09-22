@@ -98,7 +98,6 @@ namespace CatalogueMVC.Controllers
                 {
                     book.Picture = _noImage;
                 }
-                book.Price = 0.0M;
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
