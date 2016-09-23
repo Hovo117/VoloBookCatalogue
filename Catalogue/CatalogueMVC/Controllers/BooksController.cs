@@ -17,6 +17,7 @@ namespace CatalogueMVC.Controllers
     public class BooksController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
+        private BooksCatalogueDBEntities db1 = new BooksCatalogueDBEntities();
 
         // GET: Books
         public async Task<ActionResult> Index( /*int? page*/)
@@ -136,20 +137,28 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            book = await db.Books.FindAsync(book.BookID);
+            string pic = "" ;
+            using (db1)
+            {
+                pic = db1.Books.Find(book.BookID).Picture;
+            }
             if (ModelState.IsValid)
             {
                 if (file != null && file.ContentLength > 0)
                 {
-                    if (book.Picture != _noImage)
+                    if (pic != _noImage)
                     {
-                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), book.Picture));
+                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));
                     }
-                    
+
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
+                }
+                else
+                {
+                book.Picture = pic;
                 }
 
                 db.Entry(book).State = EntityState.Modified;
