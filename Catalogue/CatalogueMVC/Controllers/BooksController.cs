@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using BooksEntitiesDAL;
 using System.IO;
 using System.ComponentModel.DataAnnotations;
+using PagedList;
 
 namespace CatalogueMVC.Controllers
 {
@@ -19,9 +20,13 @@ namespace CatalogueMVC.Controllers
         private BooksCatalogueDBEntities db1 = new BooksCatalogueDBEntities();
 
         // GET: Books
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index( /*int? page*/)
         {
             //var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+
+            //int pageSize = 3;
+            //int pageNumber = (page ?? 1);
+            //return View(books.ToPagedList(pageNumber, pageSize));
 
             return View(/*await books.ToListAsync()*/);
         }
@@ -32,6 +37,11 @@ namespace CatalogueMVC.Controllers
             if (!string.IsNullOrEmpty(keyword))
             {
                 books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
+
+                if(!books.Any())
+                {
+                    return RedirectToAction("NotFound","Books");
+                }
             }
 
             return View(books.ToList());
@@ -89,7 +99,6 @@ namespace CatalogueMVC.Controllers
                 {
                     book.Picture = _noImage;
                 }
-
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
