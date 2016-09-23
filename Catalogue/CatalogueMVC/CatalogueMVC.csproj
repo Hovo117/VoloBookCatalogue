@@ -283,8 +283,8 @@
     <Content Include="Views\Countries\Details.cshtml" />
     <Content Include="Views\Countries\Edit.cshtml" />
     <Content Include="Views\Countries\Index.cshtml" />
-    <Content Include="Views\Books\SearchBook.cshtml" />
     <Content Include="Views\Books\NotFound.cshtml" />
+    <Content Include="Views\Books\GridBooks.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

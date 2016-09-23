@@ -1,0 +1,74 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<BooksEntitiesDAL.Book>
+<table class="table @*table-hover table-striped*@">
+    <tr>
+        <th>
+
+        </th>
+
+        <th>
+            @Html.ActionLink("Title", "Index")
+        </th>
+
+        <th>
+            @Html.ActionLink("Author", "Index")
+        </th>
+
+        <th>
+            Country
+        </th>
+
+        <th>
+            @Html.ActionLink("Price", "Index")
+        </th>
+
+        <th>
+            Description
+        </th>
+        <th>
+            PagesCount
+        </th>
+
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @if (@item.Picture != null)
+                {
+                    <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Country1)
+            </td>
+            <td>
+                @{  decimal totalPrice = item.Price;
+                totalPrice += item.Country.TelCode;
+                }
+                @Html.DisplayFor(modelItem => totalPrice) $
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PagesCount)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit","Books" , new { id = item.BookID } , new { }) |
+                @Html.ActionLink("Details", "Details", "Books", new { id = item.BookID }, new { }) |
+                @Html.ActionLink("Delete", "Delete", "Books", new { id = item.BookID }, new { })
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

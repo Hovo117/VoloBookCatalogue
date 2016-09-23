@@ -20,32 +20,64 @@ namespace CatalogueMVC.Controllers
         private BooksCatalogueDBEntities db1 = new BooksCatalogueDBEntities();
 
         // GET: Books
-        public async Task<ActionResult> Index( /*int? page*/)
+        public ActionResult Index(string searchString, string sortOption, int page = 1)
         {
-            //var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+            int pageSize = 3;
 
-            //int pageSize = 3;
-            //int pageNumber = (page ?? 1);
-            //return View(books.ToPagedList(pageNumber, pageSize));
+            var books = db.Books.AsQueryable();
 
-            return View(/*await books.ToListAsync()*/);
-        }
-
-        public ActionResult SearchBook([StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]string keyword)
-        {
-            var books = db.Books.Include(b => b.Author).Include(b => b.Country);
-            if (!string.IsNullOrEmpty(keyword))
+            if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
+                books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString));
+            }
+            switch (sortOption)
+            {
+                case "title_acs":
+                    books = books.OrderBy(p => p.Title);
+                    break;
+                case "title_desc":
+                    books = books.OrderByDescending(p => p.Title);
+                    break;
+                case "author_acs":
+                    books = books.OrderBy(p => p.AuthorID);
+                    break;
+                case "author_desc":
+                    books = books.OrderByDescending(p => p.AuthorID);
+                    break;
 
-                if(!books.Any())
-                {
-                    return RedirectToAction("NotFound","Books");
-                }
+                case "price_acs":
+                    books = books.OrderBy(p => p.Price);
+                    break;
+                case "price_desc":
+                    books = books.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    books = books.OrderBy(p => p.BookID);
+                    break;
+
             }
 
-            return View(books.ToList());
+
+            return Request.IsAjaxRequest()
+                ? (ActionResult)PartialView("GridBooks", books.ToPagedList(page, pageSize))
+                : View(books.ToPagedList(page, pageSize));
         }
+
+        //public ActionResult SearchBook([StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]string keyword)
+        //{
+        //    var books = db.Books.Include(b => b.Author).Include(b => b.Country);
+        //    if (!string.IsNullOrEmpty(keyword))
+        //    {
+        //        books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
+
+        //        if(!books.Any())
+        //        {
+        //            return RedirectToAction("NotFound","Books");
+        //        }
+        //    }
+
+        //    return View(books.ToList());
+        //}
 
         public ActionResult NotFound()
         {
