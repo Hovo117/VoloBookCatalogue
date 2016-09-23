@@ -137,10 +137,13 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-
+            string pic = "" ;
+            using (db1)
+            {
+                pic = db1.Books.Find(book.BookID).Picture;
+            }
             if (ModelState.IsValid)
             {
-                var pic = db1.Books.Find(book.BookID).Picture;
                 if (file != null && file.ContentLength > 0)
                 {
                     if (pic != _noImage)
@@ -152,6 +155,10 @@ namespace CatalogueMVC.Controllers
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
                     book.Picture = fileName;
+                }
+                else
+                {
+                book.Picture = pic;
                 }
 
                 db.Entry(book).State = EntityState.Modified;
