@@ -16,6 +16,7 @@ namespace CatalogueMVC.Controllers
     public class BooksController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
+        private BooksCatalogueDBEntities db1 = new BooksCatalogueDBEntities();
 
         // GET: Books
         public async Task<ActionResult> Index()
@@ -32,7 +33,7 @@ namespace CatalogueMVC.Controllers
             {
                 books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
             }
-           
+
             return View(books.ToList());
         }
 
@@ -127,16 +128,17 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            book = await db.Books.FindAsync(book.BookID);
+
             if (ModelState.IsValid)
             {
+                var pic = db1.Books.Find(book.BookID).Picture;
                 if (file != null && file.ContentLength > 0)
                 {
-                    if (book.Picture != _noImage)
+                    if (pic != _noImage)
                     {
-                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), book.Picture));
+                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));
                     }
-                    
+
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
