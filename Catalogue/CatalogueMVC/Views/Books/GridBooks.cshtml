@@ -1,17 +1,17 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<BooksEntitiesDAL.Book>
-<table class="table @*table-hover table-striped*@">
+<table id="t1" class="table @*table-hover table-striped*@">
     <tr>
         <th>
 
         </th>
 
         <th>
-            @Html.ActionLink("Title", "Index")
+            <a href="" id="Title">Title</a> 
         </th>
 
         <th>
-            @Html.ActionLink("Author", "Index")
+            <a href="" id="Author">Author</a> 
         </th>
 
         <th>
@@ -19,7 +19,7 @@
         </th>
 
         <th>
-            @Html.ActionLink("Price", "Index")
+            <a href="" id="Price">Price</a> 
         </th>
 
         <th>
@@ -64,9 +64,9 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit","Books" , new { id = item.BookID } , new { }) |
-                @Html.ActionLink("Details", "Details", "Books", new { id = item.BookID }, new { }) |
-                @Html.ActionLink("Delete", "Delete", "Books", new { id = item.BookID }, new { })
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookID } ) |
+                @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
             </td>
         </tr>
     }
