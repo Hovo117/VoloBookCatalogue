@@ -21,7 +21,7 @@
             @Html.ActionLink("Books", "Index", "Books", new { area = "" }, new { @class = "navbar-brand" })
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active">@Html.ActionLink("Authors", "Index", "Authors")</li>
                 <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
@@ -36,16 +36,17 @@
             </ul>
 
             <div class="col-sm-3 col-md-3">
-                <form class="navbar-form" role="search">
+                <div class="navbar-form">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search by Title or Author" name="SearchString" id="SearchString" size="40">
                         <div class="input-group-btn">
                             <button class="btn btn-default" id="btnSearch" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-            <div style="margin-right:30px;">
+
+            <div style="margin-right:45px;">
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -54,9 +55,6 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        @*<footer>
-                <p style="position:absolute;bottom:4%;">&copy; @DateTime.Now.Year - Books Catalogue</p>
-            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")

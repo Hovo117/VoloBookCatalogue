@@ -63,22 +63,6 @@ namespace CatalogueMVC.Controllers
                 : View(books.ToPagedList(page, pageSize));
         }
 
-        //public ActionResult SearchBook([StringLength(10, MinimumLength = 3, ErrorMessage = "3-10 characters required")]string keyword)
-        //{
-        //    var books = db.Books.Include(b => b.Author).Include(b => b.Country);
-        //    if (!string.IsNullOrEmpty(keyword))
-        //    {
-        //        books = books.Where(n => n.Title.Contains(keyword) || n.Author.FullName.Contains(keyword));
-
-        //        if(!books.Any())
-        //        {
-        //            return RedirectToAction("NotFound","Books");
-        //        }
-        //    }
-
-        //    return View(books.ToList());
-        //}
-
         public ActionResult NotFound()
         {
             return View();

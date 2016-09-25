@@ -43,19 +43,19 @@
         function search() {
             $.ajax({
                 url: "/Books/Index?searchString=" + $('#SearchString').val(),
-                success: function(result) {
+                success: function (result) {
                     ChangeUrl("index", "/Books/Index?searchString=" + $('#SearchString').val());
-                    $('#ProductList').html(result);
+                    $('#GridBooks').html(result);
                 }
             });
         }
 
-        $(function() {
-            $("#btnSearch").click(function() {
+        $(function () {
+            $("#btnSearch").click(function () {
                 search();
             });
 
-            $("#SearchString").keypress(function(e) {
+            $("#SearchString").keypress(function (e) {
                 if (e.keyCode == 13) {
                     search();
                 }
@@ -73,7 +73,7 @@
                 console.log(url);
                 $.ajax({
                     url: url,
-                    success: function(result) {
+                    success: function (result) {
                         ChangeUrl('index', url);
                         $('#GridBooks').html(result);
                     }
@@ -81,7 +81,7 @@
             });
 
 
-            $('body').on('click', '#GridBooks table #Price ,#Title,#Author ', function (event) {
+            $('body').on('click', '#GridBooks .table a', function (event) {
 
                 event.preventDefault();
 
@@ -97,49 +97,49 @@
                 console.log(currentSortOption);
                 var sort;
                 switch (currentSortOption) {
-                case "title_acs":
-                    sort = 'sortOption=title_desc';
-                    break;
-                case "title_desc":
-                    sort = 'sortOption=title_acs';
-                    break;
-                case "author_acs":
-                    sort = 'sortOption=author_desc';
-                    break;
-                case "author_desc":
-                    sort = 'sortOption=author_acs';
-                    break;
-                case "price_acs":
-                    sort = 'sortOption=price_desc';
-                    break;
-                case "price_desc":
-                    sort = 'sortOption=price_acs';
-                    break;
-                default:
-                    sort = '';
-                    break;
+                    case "title_acs":
+                        sort = 'sortOption=title_desc';
+                        break;
+                    case "title_desc":
+                        sort = 'sortOption=title_acs';
+                        break;
+                    case "author_acs":
+                        sort = 'sortOption=author_desc';
+                        break;
+                    case "author_desc":
+                        sort = 'sortOption=author_acs';
+                        break;
+                    case "price_acs":
+                        sort = 'sortOption=price_desc';
+                        break;
+                    case "price_desc":
+                        sort = 'sortOption=price_acs';
+                        break;
+                    default:
+                        sort = '';
+                        break;
                 }
 
 
                 switch (columnToSort) {
-                case 'Title':
-                    if (currentSortOption != 'title_acs' && currentSortOption != 'title_desc') {
-                        sort = 'sortOption=title_acs';
-                    }
-                    break;
-                case 'Author':
-                    if (currentSortOption != 'author_acs' && currentSortOption != 'author_desc') {
-                        sort = 'sortOption=author_acs';
-                    }
-                    break;
-                case 'Price':
-                    if (currentSortOption != 'price_acs' && currentSortOption != 'price_decs') {
-                        sort = 'sortOption=price_acs';
-                    }
-                    break;
-                default:
-                    sort = '';
-                    break;
+                    case 'Title':
+                        if (currentSortOption != 'title_acs' && currentSortOption != 'price_desc') {
+                            sort = 'sortOption=title_acs';
+                        }
+                        break;
+                    case 'Author':
+                        if (currentSortOption != 'author_acs' && currentSortOption != 'author_desc') {
+                            sort = 'sortOption=author_acs';
+                        }
+                        break;
+                    case 'Price':
+                        if (currentSortOption != 'price_acs' && currentSortOption != 'price_decs') {
+                            sort = 'sortOption=price_acs';
+                        }
+                        break;
+                    default:
+                        sort = '';
+                        break;
 
                 }
                 if (sort != '' & searchString != '') {
@@ -148,12 +148,9 @@
                 var url = '/Books/Index?' + searchString + sort;
                 $.ajax({
                     url: url,
-                    success: function(result) {
+                    success: function (result) {
                         ChangeUrl('index', url);
                         $('#GridBooks').html(result);
-                            history.pushState(null, null, this.href);
-                            location.reload();
-
                     }
                 });
             });

@@ -1,17 +1,21 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<BooksEntitiesDAL.Book>
-<table id="t1" class="table table-hover">
+
+<table class="table">
+    <thead>
+
+    </thead>
     <tr>
         <th>
 
         </th>
 
         <th>
-            <a href="" id="Title">Title</a> 
+             @Html.ActionLink("Title", "Index")
         </th>
 
         <th>
-            <a href="" id="Author">Author</a> 
+            @Html.ActionLink("Author", "Index")
         </th>
 
         <th>
@@ -19,7 +23,7 @@
         </th>
 
         <th>
-            <a href="" id="Price">Price</a> 
+            @Html.ActionLink("Price", "Index")
         </th>
 
         <th>
@@ -71,4 +75,5 @@
         </tr>
     }
 </table>
+
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
