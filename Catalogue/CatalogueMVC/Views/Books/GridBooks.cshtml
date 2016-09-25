@@ -19,7 +19,7 @@
         </th>
 
         <th>
-            Country
+            @Html.ActionLink("Country", "Index")
         </th>
 
         <th>
@@ -27,10 +27,7 @@
         </th>
 
         <th>
-            Description
-        </th>
-        <th>
-            PagesCount
+            @Html.ActionLink("Pages", "Index")
         </th>
 
         <th></th>
@@ -54,13 +51,10 @@
                 @Html.DisplayFor(modelItem => item.Country.Country1)
             </td>
             <td>
-                @{  decimal totalPrice = item.Price;
-                totalPrice += item.Country.TelCode;
+                @{  decimal totalPrice = item.Price + item.Country.TelCode;
+                    var price = totalPrice.ToString("0.##");
                 }
-                @Html.DisplayFor(modelItem => totalPrice) $
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => price) $
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PagesCount)

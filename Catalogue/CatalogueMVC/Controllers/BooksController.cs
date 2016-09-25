@@ -29,10 +29,10 @@ namespace CatalogueMVC.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString));
-                if(!books.Any())
-                {
-                    return RedirectToAction("NotFound");
-                }
+                //if(!books.Any())
+                //{
+                //    return RedirectToAction("NotFound");
+                //}
             }
             switch (sortOption)
             {
@@ -48,7 +48,18 @@ namespace CatalogueMVC.Controllers
                 case "author_desc":
                     books = books.OrderByDescending(p => p.AuthorID);
                     break;
-
+                case "country_acs":
+                    books = books.OrderBy(p => p.CountryID);
+                    break;
+                case "country_desc":
+                    books = books.OrderByDescending(p => p.CountryID);
+                    break;
+                case "pages_acs":
+                    books = books.OrderBy(p => p.PagesCount);
+                    break;
+                case "pages_desc":
+                    books = books.OrderByDescending(p => p.PagesCount);
+                    break;
                 case "price_acs":
                     books = books.OrderBy(p => p.Price);
                     break;
@@ -110,6 +121,14 @@ namespace CatalogueMVC.Controllers
             {
                 if (file != null && file.ContentLength > 0)
                 {
+                    var types = new[] { "jpg", "jpeg", "png" };
+                    var ext = System.IO.Path.GetExtension(file.FileName).Substring(1);
+
+                    if (!types.Contains(ext))
+                    {
+                        return RedirectToAction("Index");
+                    }
+
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                     file.SaveAs(path);
@@ -166,6 +185,14 @@ namespace CatalogueMVC.Controllers
             {
                 if (file != null && file.ContentLength > 0)
                 {
+                    var types = new[] { "jpg", "jpeg", "png" };
+                    var ext = System.IO.Path.GetExtension(file.FileName).Substring(1);
+
+                    if (!types.Contains(ext))
+                    {
+                        return RedirectToAction("Index");
+                    }
+
                     if (pic != _noImage)
                     {
                         System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));
