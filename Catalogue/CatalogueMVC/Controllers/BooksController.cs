@@ -29,6 +29,10 @@ namespace CatalogueMVC.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString));
+                if(!books.Any())
+                {
+                    return RedirectToAction("NotFound");
+                }
             }
             switch (sortOption)
             {

@@ -1,6 +1,16 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<BooksEntitiesDAL.Book>
 
+@*<script type="text/javascript">
+
+    $(function(){
+        $("#linkEdit").click(function(){
+            window.location.href = "@Url.Action("Edit","Books")";
+        });
+    });
+
+</script>*@
+
 <table class="table">
     <thead>
 
@@ -11,11 +21,11 @@
         </th>
 
         <th>
-             @Html.ActionLink("Title", "Index")
+             @Html.ActionLink("Title", "Index", new { @id = "Title" })
         </th>
 
         <th>
-            @Html.ActionLink("Author", "Index")
+            @Html.ActionLink("Author", "Index", new { @id = "Author" })
         </th>
 
         <th>
@@ -23,7 +33,7 @@
         </th>
 
         <th>
-            @Html.ActionLink("Price", "Index")
+            @Html.ActionLink("Price", "Index", new { @id = "Price" })
         </th>
 
         <th>
@@ -40,10 +50,9 @@
         <tr>
 
             <td>
-                @if (@item.Picture != null)
-                {
+                <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();" >
                     <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
-                }
+                </a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -68,9 +77,8 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.BookID } ) |
-                @Html.ActionLink("Details", "Details", new { id = item.BookID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
+                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button> |
+                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID }) + "'");">Delete</button>
             </td>
         </tr>
     }
