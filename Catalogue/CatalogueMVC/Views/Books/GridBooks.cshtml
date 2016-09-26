@@ -1,17 +1,25 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<BooksEntitiesDAL.Book>
 
-<table class="table">
-    <thead>
+<div id="create-dialog" class="modal" style="display:none; "></div>
 
-    </thead>
+<div id="details-dialog" class="modal" style="display:none; "></div>
+
+<div id="delete-dialog" class="modal-dialog" @*style="display:none"*@>
+    Do u want to delete this Book ...
+</div>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+<table class="table table-hover table-responsive">
     <tr>
         <th>
 
         </th>
 
         <th>
-             @Html.ActionLink("Title", "Index")
+            @Html.ActionLink("Title", "Index")
         </th>
 
         <th>
@@ -37,7 +45,7 @@
         <tr>
 
             <td>
-                <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();" >
+                <a href="#" class="lnkDetail" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();">
                     <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
                 </a>
             </td>
@@ -61,11 +69,24 @@
             </td>
 
             <td>
-                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button> |
-                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID }) + "'");">Delete</button>
+                @Html.ActionLink("Edit", "Edit", new { id = item.BookID }, new { @class = "lnkEdit" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.BookID }, new { @class = "lnkDelete" })
+
+                @*<button type="button" class="btn btn-link btn-sm lnkEdit" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button> |
+                    <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID }) + "'");">Delete</button>*@
             </td>
         </tr>
-    }
+                    }
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="~/Scripts/myModalJS.js"></script>
+}
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
