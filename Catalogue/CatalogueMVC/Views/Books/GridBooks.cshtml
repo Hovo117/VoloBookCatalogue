@@ -11,23 +11,23 @@
         </th>
 
         <th>
-             @Html.ActionLink("Title", "Index")
+            <a href="" class="Sort">Title</a>
         </th>
 
         <th>
-            @Html.ActionLink("Author", "Index")
+            <a href="" class="Sort">Author</a>
         </th>
 
         <th>
-            @Html.ActionLink("Country", "Index")
+            <a href="" class="Sort">Country</a>
         </th>
 
         <th>
-            @Html.ActionLink("Price", "Index")
+            <a href="" class="Sort">Price</a>
         </th>
 
         <th>
-            @Html.ActionLink("Pages", "Index")
+            <a href="" class="Sort">Pages</a>
         </th>
 
         <th></th>
@@ -37,7 +37,7 @@
         <tr>
 
             <td>
-                <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();" >
+                <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();">
                     <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
                 </a>
             </td>
@@ -61,11 +61,22 @@
             </td>
 
             <td>
-                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button> |
-                <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID }) + "'");">Delete</button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @*<button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button>
+
+                        <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID}) + "'");">Delete</button>*@
+
+                    @Html.ActionLink("Edit | ", "Edit", new { id = item.BookID })
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookID }, new { onclick = "return confirm('Are you sure you wish to delete this book?');" })
+
+
+                }
             </td>
+
         </tr>
-    }
+                    }
 </table>
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

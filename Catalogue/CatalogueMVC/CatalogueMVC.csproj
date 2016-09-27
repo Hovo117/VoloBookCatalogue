@@ -192,6 +192,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="App_Data\BooksCatalogueDB.mdf" />
     <Content Include="App_Data\BooksCatalogueDB_log.ldf">
       <DependentUpon>BooksCatalogueDB.mdf</DependentUpon>
