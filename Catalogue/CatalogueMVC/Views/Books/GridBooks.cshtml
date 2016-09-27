@@ -63,18 +63,15 @@
             <td>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    @*<button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Edit", "Books",new { id = item.BookID }) + "'");">Edit</button>
+                    <p style="display:inline-block">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
+                    </p>
 
-                        <button type="button" class="btn btn-link btn-sm" onclick="@("window.location.href='" + @Url.Action("Delete", "Books",new { id = item.BookID}) + "'");">Delete</button>*@
-
-                    @Html.ActionLink("Edit | ", "Edit", new { id = item.BookID })
-
-                    @Html.ActionLink("Delete", "Delete", new { id = item.BookID }, new { onclick = "return confirm('Are you sure you wish to delete this book?');" })
-
-
+                    <p style="display:inline-block">
+                        @Html.ActionLink("Delete", "Delete", new { id = item.BookID }, new { onclick = "return confirm('Are you sure you wish to delete this book?');" })
+                    </p>
                 }
             </td>
-
         </tr>
                     }
 </table>

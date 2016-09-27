@@ -39,6 +39,9 @@
                 </li>
             </ul>
 
+            @if (ViewBag.Title == "Index_Books")
+            {
+
             <div class="col-sm-3 col-md-3">
                 <div class="navbar-form">
                     <div class="input-group">
@@ -49,6 +52,8 @@
                     </div>
                 </div>
             </div>
+            }
+
 
             <div style="margin-right:45px;">
                 @Html.Partial("_LoginPartial")
