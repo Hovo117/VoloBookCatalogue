@@ -106,7 +106,7 @@ namespace CatalogueMVC.Controllers
         {
             ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName");
             ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1");
-            return PartialView("Create");
+            return View();
         }
 
         // POST: Books/Create
@@ -140,7 +140,6 @@ namespace CatalogueMVC.Controllers
                 }
                 db.Books.Add(book);
                 await db.SaveChangesAsync();
-                TempData["msg"] = "Data saved successfully!";
                 return RedirectToAction("Index");
             }
 
@@ -220,7 +219,6 @@ namespace CatalogueMVC.Controllers
 
         // GET: Books/Delete/5
         [Authorize]
-
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -232,17 +230,6 @@ namespace CatalogueMVC.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(book);
-        }
-
-        //POST: Books/Delete/5
-        [Authorize]
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Book book = await db.Books.FindAsync(id);
 
             if (book.Picture != null && book.Picture != _noImage)
             {
@@ -257,7 +244,45 @@ namespace CatalogueMVC.Controllers
             db.Books.Remove(book);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+
+            //return View(book);
         }
+        //public async Task<ActionResult> Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Book book = await db.Books.FindAsync(id);
+        //    if (book == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(book);
+        //}
+
+        //// POST: Books/Delete/5
+        //[Authorize]
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(int id)
+        //{
+        //    Book book = await db.Books.FindAsync(id);
+
+        //    if (book.Picture != null && book.Picture != _noImage)
+        //    {
+        //        var fileName = Path.GetFileName(book.Picture);
+        //        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+        //        if (System.IO.File.Exists(path))
+        //        {
+        //            System.IO.File.Delete(path);
+        //        }
+        //    }
+
+        //    db.Books.Remove(book);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
