@@ -230,7 +230,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\myJS.js" />
-    <Content Include="Scripts\myModalJS.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -270,10 +269,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Books\CreateOld.cshtml" />
+    <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\Delete.cshtml" />
-    <Content Include="Views\Books\DetailsOld.cshtml" />
-    <Content Include="Views\Books\EditOld.cshtml" />
+    <Content Include="Views\Books\Details.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
     <Content Include="Views\Authors\Create.cshtml" />
     <Content Include="Views\Authors\Delete.cshtml" />
@@ -287,9 +286,6 @@
     <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Views\Books\NotFound.cshtml" />
     <Content Include="Views\Books\GridBooks.cshtml" />
-    <Content Include="Views\Books\Create.cshtml" />
-    <Content Include="Views\Books\Details.cshtml" />
-    <Content Include="Views\Books\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

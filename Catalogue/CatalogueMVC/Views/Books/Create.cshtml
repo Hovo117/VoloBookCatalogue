@@ -1,14 +1,19 @@
 ﻿@model BooksEntitiesDAL.Book
+
 @{
-    Layout = null;
+    ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create","Books",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="modal-content form-horizontal">
-
+    <div class="form-horizontal">
+        <h4>Book</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -61,24 +66,22 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="file" id="file" />
+                    <input type="file" name="file" id="file" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
-                @Html.ActionLink("Back to List", "Index", "Books")
             </div>
         </div>
     </div>
 }
 
-@section Scripts {
-@Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryval")
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="~/Scripts/myModalJS.js"></script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
