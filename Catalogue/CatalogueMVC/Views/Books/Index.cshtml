@@ -12,6 +12,8 @@
 {
     <script src="~/Scripts/myJS.js"></script>
 }
+
+<div id="GridBooks">
 <div class="col-sm-3 col-md-3" style="width:90%">
     <div class="navbar-form">
         <div class="input-group">
@@ -22,8 +24,6 @@
         </div>
     </div>
 </div>
-
-<div id="GridBooks">
 
     
 
@@ -63,7 +63,7 @@
             <tr>
 
                 <td>
-                    <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();">
+                    <a href="" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'")">
                         <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
                     </a>
                 </td>
