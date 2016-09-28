@@ -29,10 +29,10 @@ namespace CatalogueMVC.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString));
-                //if(!books.Any())
-                //{
-                //    return RedirectToAction("NotFound");
-                //}
+                if (!books.Any())
+                {
+                    return RedirectToAction("NotFound");
+                }
             }
             switch (sortOption)
             {
@@ -218,6 +218,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Books/Delete/5
+        [HttpPost]
         [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {

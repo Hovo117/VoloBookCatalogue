@@ -8,9 +8,28 @@
     @Scripts.Render("~/bundles/modernizr")
 
     @section Scripts{
-    <script src="~/Scripts/myModalJS.js"></script>
+        <script src="~/Scripts/myModalJS.js"></script>
     }
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+        }
 
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 60px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            /*background-color: #f5f5f5;*/
+        }
+    </style>
 </head>
 <body>
 
@@ -26,32 +45,20 @@
         </div>
 
         <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active">@Html.ActionLink("Authors", "Index", "Authors")</li>
-                <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Book", "Create", "Books")</li>
-                        <li>@Html.ActionLink("Author", "Create", "Authors")</li>
-                        <li>@Html.ActionLink("Country", "Create", "Countries")</li>
-                    </ul>
-                </li>
-            </ul>
-
-            @if (ViewBag.Title == "Index_Books")
+            @if (User.Identity.IsAuthenticated)
             {
-
-            <div class="col-sm-3 col-md-3">
-                <div class="navbar-form">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search by Title or Author" name="SearchString" id="SearchString" size="40">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" id="btnSearch" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">@Html.ActionLink("Authors", "Index", "Authors")</li>
+                    <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Book", "Create", "Books")</li>
+                            <li>@Html.ActionLink("Author", "Create", "Authors")</li>
+                            <li>@Html.ActionLink("Country", "Create", "Countries")</li>
+                        </ul>
+                    </li>
+                </ul>
             }
 
 
@@ -64,10 +71,16 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+        <footer class="text-center" style="margin-top:5px">
+            <p style="left:0;">&copy; @DateTime.Now.Year - Books Catalogue</p>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+
+
 </html>
