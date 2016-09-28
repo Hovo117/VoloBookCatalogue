@@ -1,111 +1,22 @@
-﻿@*@model IEnumerable<BooksEntitiesDAL.Book>*@
+﻿@model IEnumerable<BooksEntitiesDAL.Book>
 
-    @using PagedList.Mvc
-    @model PagedList.IPagedList<BooksEntitiesDAL.Book>
 @{
-    ViewBag.Title = "Index_Books";
+    ViewBag.Title = "Index";
 }
+
 <h2></h2>
 
+<div class="button_box2">
+    <form class="form-wrapper-2 cf">
+        <input type="text" name="SearchString" id="SearchString" placeholder="Search by Book or Author..." required>
+        <button type="submit" id="btnSearch"><i class="glyphicon glyphicon-search"></i></button>
+    </form>
+</div>
 
+<div id="GridBooks">
+    @Html.Partial("GridBooks", Model)
+</div>
 @section scripts
 {
     <script src="~/Scripts/myJS.js"></script>
 }
-
-<div id="GridBooks">
-<div class="col-sm-3 col-md-3" style="width:90%">
-    <div class="navbar-form">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search by Title or Author" name="SearchString" id="SearchString">
-            <div class="input-group-btn">
-                <button class="btn btn-default" id="btnSearch" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <table class="table">
-        <thead>
-
-        </thead>
-        <tr>
-            <th>
-
-            </th>
-
-            <th>
-                <a href="" class="Sort">Title</a>
-            </th>
-
-            <th>
-                <a href="" class="Sort">Author</a>
-            </th>
-
-            <th>
-                <a href="" class="Sort">Country</a>
-            </th>
-
-            <th>
-                <a href="" class="Sort">Price</a>
-            </th>
-
-            <th>
-                <a href="" class="Sort">Pages</a>
-            </th>
-
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    <a href="" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'")">
-                        <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
-                    </a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country.Country1)
-                </td>
-                <td>
-                    @{  decimal totalPrice = item.Price + item.Country.TelCode;
-                        var price = totalPrice.ToString("0.##");
-                    }
-                    @Html.DisplayFor(modelItem => price) $
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PagesCount)
-                </td>
-
-                <td>
-                    @if (User.Identity.IsAuthenticated)
-                {
-                        <p style="display:inline-block">
-                            @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
-                        </p>
-
-                        <p style="display:inline-block">
-                            @Html.ActionLink("Delete", "Delete", new { id = item.BookID }, new { onclick = "return confirm('Are you sure you wish to delete this book?');" })
-                        </p>
-                    }
-                </td>
-            </tr>
-                        }
-    </table>
-
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-
-</div>
-
-
-
-
