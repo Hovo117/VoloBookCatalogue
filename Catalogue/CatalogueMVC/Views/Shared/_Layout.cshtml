@@ -22,6 +22,8 @@
         </div>
 
         <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
+            @if(User.Identity.IsAuthenticated)
+            {
             <ul class="nav navbar-nav">
                 <li class="active">@Html.ActionLink("Authors", "Index", "Authors")</li>
                 <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
@@ -34,17 +36,7 @@
                     </ul>
                 </li>
             </ul>
-
-            <div class="col-sm-3 col-md-3">
-                <div class="navbar-form">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search by Title or Author" name="SearchString" id="SearchString" size="40">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" id="btnSearch" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
 
             <div style="margin-right:45px;">
                 @Html.Partial("_LoginPartial")
