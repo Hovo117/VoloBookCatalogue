@@ -1,5 +1,13 @@
-﻿<div>
-    <h2>Not Found</h2>
-
-    @Html.ActionLink("Back to List", "Index")
+﻿@model string
+<div>
+    <h2 class="text-left">
+        The Data like " <i>@Model</i> " is not found <br />
+    </h2>
+    <hr />
+    <div class="text-left">
+        <h3>
+            @Html.ActionLink("Home Page", "Index")
+        </h3>
+    </div>
 </div>
+

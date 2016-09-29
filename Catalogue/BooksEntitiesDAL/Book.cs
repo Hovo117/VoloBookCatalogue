@@ -35,7 +35,6 @@ namespace BooksEntitiesDAL
         public int CountryID { get; set; }
 
         [Required(ErrorMessage = "The field Price must be filled")]
-        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
