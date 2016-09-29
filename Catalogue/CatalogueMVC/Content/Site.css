@@ -4,6 +4,10 @@
     font-family: 'Courgette', cursive;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -19,107 +23,140 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
 }
 
-#SearchString{
-    max-width:1000px;
+textarea {
+    min-width: 450px;
+    min-height: 200px;
+}
+
+#SearchString {
+    max-width: 1000px;
 }
 
 .button_box2 {
-margin:20px auto;
+    margin: 20px auto;
 }
 /*-------------------------------------*/
-.cf:before, .cf:after{
-content:"";
-display:inline-flex;
+.cf:before, .cf:after {
+    content: "";
+    display: inline-flex;
 }
-.cf:after{
-clear:both;
+
+.cf:after {
+    clear: both;
 }
-.cf{
-zoom:1;
+
+.cf {
+    zoom: 1;
 }
 /*-------------------------------------*/
 
 .form-wrapper-2 {
-width: 800px;
-border-radius: 10px;
-box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
+    width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.4) inset, 0 1px 0 rgba(255,255,255,.2);
 }
-.form-wrapper-2 input {
-width: 730px!important;
-height: 40px;
-padding: 10px 5px;
-float: left;
-font: bold 15px 'Raleway', sans-serif;
-border: 0;
-background: #eee;
-border-radius: 3px 0 0 3px;
-}
-.form-wrapper-2 input:focus {
-outline: 0;
-background: #fff;
--moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
--webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
-}
-.form-wrapper-2 input::-webkit-input-placeholder {
-color: #999;
-font-weight: normal;
-font-style: italic;
-}
-.form-wrapper-2 input:-moz-placeholder {
-color: #999;
-font-weight: normal;
-font-style: italic;
-}
-.form-wrapper-2 input:-ms-input-placeholder {
-color: #999;
-font-weight: normal;
-font-style: italic;
-}
-.form-wrapper-2 button {
-overflow: visible;
-position: relative;
-float: right;
-border: 0;
-padding: 0;
-cursor: pointer;
-height: 40px;
-width: 70px;
-font: bold 15px/40px 'Raleway', sans-serif;
-color: #fff;
-text-transform: uppercase;
-background: #07b7fa;
-border-radius: 0 3px 3px 0;
-text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
-}
-.form-wrapper-2 button:hover{
-background: #07b7fa;
-}
-.form-wrapper-2 button:active,
-.form-wrapper-2 button:focus{
-background: #2f44c4;
-}
-.form-wrapper-2 button:before {
-content: '';
-position: absolute;
-border-width: 8px 8px 8px 0;
-border-style: solid solid solid none;
-border-color: transparent #07b7fa transparent;
-top: 12px;
-left: -6px;
-}
-.form-wrapper-2 button:hover:before{
-border-right-color: #07b7fa;
-}
-.form-wrapper-2 button:focus:before{
-border-right-color: #07b7fa;
-}
-.form-wrapper-2 button::-moz-focus-inner {
-border: 0;
-padding: 0;
 
+    .form-wrapper-2 input {
+        width: 730px !important;
+        height: 40px;
+        padding: 10px 5px;
+        float: left;
+        font: bold 20px 'Courgette', cursive;
+        border: 0;
+        background: #eee;
+        border-radius: 3px 0 0 3px;
+    }
+
+        .form-wrapper-2 input:focus {
+            outline: 0;
+            background: #fff;
+            -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+            -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+            box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+        }
+
+        .form-wrapper-2 input::-webkit-input-placeholder {
+            color: #999;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .form-wrapper-2 input:-moz-placeholder {
+            color: #999;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        .form-wrapper-2 input:-ms-input-placeholder {
+            color: #999;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+    .form-wrapper-2 button {
+        overflow: visible;
+        position: relative;
+        float: right;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        height: 40px;
+        width: 70px;
+        font: bold 15px/40px 'Raleway', sans-serif;
+        color: #fff;
+        text-transform: uppercase;
+        background: #07b7fa;
+        border-radius: 0 3px 3px 0;
+        text-shadow: 0 -1px 0 rgba(0, 0,0, .3);
+    }
+
+        .form-wrapper-2 button:hover {
+            background: #07b7fa;
+        }
+
+        .form-wrapper-2 button:active,
+        .form-wrapper-2 button:focus {
+            background: #2f44c4;
+        }
+
+        .form-wrapper-2 button:before {
+            content: '';
+            position: absolute;
+            border-width: 8px 8px 8px 0;
+            border-style: solid solid solid none;
+            border-color: transparent #07b7fa transparent;
+            top: 12px;
+            left: -6px;
+        }
+
+        .form-wrapper-2 button:hover:before {
+            border-right-color: #07b7fa;
+        }
+
+        .form-wrapper-2 button:focus:before {
+            border-right-color: #07b7fa;
+        }
+
+        .form-wrapper-2 button::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+        }
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: rgba(255,255,255,.2);
+}
