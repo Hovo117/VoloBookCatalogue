@@ -186,3 +186,7 @@ footer {
     -o-transform:scale(1.50); /* Opera */
      transform:scale(1.50);
 }
+
+tr:hover{
+    background: rgba(238, 238, 238, .5);
+}

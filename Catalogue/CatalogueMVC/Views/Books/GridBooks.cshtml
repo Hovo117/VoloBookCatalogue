@@ -65,13 +65,18 @@
             <td>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <p style="display:inline-block;background-color:white;">
-                        @Html.ActionLink("Edit", "Edit", new { id = item.BookID }) |
-                    </p>
-
+                    <a style="background-color:white;" class="btn" href="@Url.Action("Edit", new { id = @item.BookID })">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <span class="sr-only">Edit</span>
+                    </a>
+                    @*|
                     <p style="display:inline-block">
                         @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
-                    </p>
+                    </p>*@
+                    <a style="background-color:white;" class="btn" href="@Url.Action("Delete", new { id = @item.BookID })">
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <span class="sr-only">Delete</span>
+                    </a>
                 }
             </td>
 
