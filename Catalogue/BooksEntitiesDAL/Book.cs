@@ -12,6 +12,8 @@ namespace BooksEntitiesDAL
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Validate;
 
     public partial class Book
     {
@@ -43,6 +45,10 @@ namespace BooksEntitiesDAL
         [Display(Name = "Pages")]
         public Nullable<int> PagesCount { get; set; }
 
+        [Required(ErrorMessage = "Please browse your image")]
+        [Display(Name = "Upload Image")]
+        [NotMapped]
+        [ValidateFile]
         public string Picture { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
