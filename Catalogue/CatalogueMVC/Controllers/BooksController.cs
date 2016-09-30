@@ -133,8 +133,8 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            try
-            {
+            //try
+            //{
                 if (ModelState.IsValid)
                 {
 
@@ -148,16 +148,12 @@ namespace CatalogueMVC.Controllers
                         {
                             return RedirectToAction("Index");
                         }
-                        if (file.ContentLength > 4096)
-                        {
-                            return RedirectToAction("Index");
-                        }
 
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                         WebImage img = new WebImage(file.InputStream);
-                        if (img.Width > 1000)
-                            img.Resize(1000, 1000);
+                        if (img.Width > 270)
+                            img.Resize(260, 400);
                         img.Save(path);
                         book.Picture = fileName;
                     }
@@ -175,11 +171,11 @@ namespace CatalogueMVC.Controllers
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
                 return View(book);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         // GET: Books/Edit/5
@@ -216,8 +212,8 @@ namespace CatalogueMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            try
-            {
+            //try
+            //{
                 string pic = "";
                 using (db1)
                 {
@@ -234,10 +230,6 @@ namespace CatalogueMVC.Controllers
                         {
                             return RedirectToAction("Index");
                         }
-                        if (file.ContentLength > 4096)
-                        {
-                            return RedirectToAction("Index");
-                        }
 
                         if (pic != _noImage)
                         {
@@ -247,8 +239,8 @@ namespace CatalogueMVC.Controllers
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                         WebImage img = new WebImage(file.InputStream);
-                        if (img.Width > 1000)
-                            img.Resize(1000, 1500);
+                        if (img.Width > 270)
+                            img.Resize(260, 400);
                         img.Save(path);
                         book.Picture = fileName;
                     }
@@ -264,11 +256,11 @@ namespace CatalogueMVC.Controllers
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
                 return View(book);
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
+            //}
+            //catch(Exception ex)
+            //{
+            //    throw ex;
+            //}
 
         }
 

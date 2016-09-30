@@ -3,7 +3,7 @@
 
 
 
-<table class="table">
+<table class="table" id="content-wrap">
     <thead>
 
     </thead>
@@ -40,7 +40,7 @@
 
             <td>
                 <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Books",new { id = item.BookID }) + "'");event.preventDefault();">
-                    <img src="~/Images/@item.Picture" width="90" height="140" alt="img" />
+                    <img src="~/Images/@item.Picture" width="100" height="150" alt="img" />
                 </a>
             </td>
             <td>
