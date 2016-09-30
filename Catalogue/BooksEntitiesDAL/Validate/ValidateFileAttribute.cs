@@ -16,11 +16,9 @@ namespace BooksEntitiesDAL.Validate
 
             var file = value as HttpPostedFileBase;
 
-            if (file == null)
-                return false;
-            else if (!sAllowedExt.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
+            if (file != null && !sAllowedExt.Contains(file.FileName.Substring(file.FileName.LastIndexOf('.'))))
             {
-                ErrorMessage = "Please upload Your Photo of type: " + string.Join(", ", sAllowedExt);
+                ErrorMessage = "Please upload Your Image of type: " + string.Join(", ", sAllowedExt);
                 return false;
             }
             else

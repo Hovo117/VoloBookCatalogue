@@ -67,9 +67,7 @@
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="file" id="file" class="file">
-                @*<input id="input-4" name="input4[]" type="file" multiple class="file-loading">*@
-                @*@Html.LabelFor(model => model.Picture, "Please choose an Image less than 4 mb.", new { @style = "color:red;" })*@
-                @Html.ValidationMessageFor(m => m.Picture, string.Empty, new { id = "validationTxt" })
+                @Html.ValidationMessageFor(m => m.Picture, string.Empty, new { id = "validationTxt" , @class = "text-danger" })
             </div>
         </div>
 

@@ -2,6 +2,11 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Courgette', cursive;
+    background-image:url(Image/bg.jpeg);
+    background-position:right;
+    background-attachment:fixed;
+    background-repeat:no-repeat;    
+    background-size:cover;
 }
 
 a {
@@ -163,7 +168,7 @@ footer {
     left: 0;
     /* Set the fixed height of the footer here */
     height: 60px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
 }
 
 .image img {

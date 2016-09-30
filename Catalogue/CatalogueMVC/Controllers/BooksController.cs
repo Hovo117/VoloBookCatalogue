@@ -140,15 +140,6 @@ namespace CatalogueMVC.Controllers
 
                     if (file != null && file.ContentLength > 0)
                     {
-
-                        var allowedExtensions = new[] { ".jpg", ".png", ".jpeg" };
-                        var checkextension = Path.GetExtension(file.FileName).ToLower();
-
-                        if (!allowedExtensions.Contains(checkextension))
-                        {
-                            return RedirectToAction("Index");
-                        }
-
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/Images"), fileName);
                         WebImage img = new WebImage(file.InputStream);

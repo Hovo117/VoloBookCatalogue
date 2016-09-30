@@ -45,8 +45,6 @@ namespace BooksEntitiesDAL
         [Display(Name = "Pages")]
         public Nullable<int> PagesCount { get; set; }
 
-        [Required(ErrorMessage = "Please browse your image")]
-        [Display(Name = "Upload Image")]
         [NotMapped]
         [ValidateFile]
         public string Picture { get; set; }

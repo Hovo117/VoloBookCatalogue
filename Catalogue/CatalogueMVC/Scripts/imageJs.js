@@ -26,17 +26,11 @@ $(function () {
             }
         }
         if (flag == false) {
-            $("#validationTxt").text("You can upload only jpg,png,jpeg extension file");
+            $("#validationTxt").text("Please upload Your Image of type: jpg, png, jpeg");
             return false;
         }
         else {
-            var size = GetFileSize('file');
-            if (size > 3) {
-                $("#validationTxt").text("You can upload file up to 1 MB");
-            }
-            else {
-                $("#validationTxt").text("");
-            }
+            $("#validationTxt").text("");
         }
     });
 });
