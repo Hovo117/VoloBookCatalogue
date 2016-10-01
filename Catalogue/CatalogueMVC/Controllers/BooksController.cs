@@ -74,7 +74,6 @@ namespace CatalogueMVC.Controllers
                     default:
                         books = books.OrderBy(p => p.BookID);
                         break;
-
                 }
 
                 if (page > books.ToPagedList(page, pageSize).PageCount)
@@ -137,7 +136,6 @@ namespace CatalogueMVC.Controllers
             //{
                 if (ModelState.IsValid)
                 {
-
                     if (file != null && file.ContentLength > 0)
                     {
                         var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -157,7 +155,6 @@ namespace CatalogueMVC.Controllers
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
-
 
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);

@@ -45,7 +45,6 @@ namespace BooksEntitiesDAL
         [Display(Name = "Pages")]
         public Nullable<int> PagesCount { get; set; }
 
-        [NotMapped]
         [ValidateFile]
         public string Picture { get; set; }
 
