@@ -99,7 +99,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AuthorID" Type="int" Nullable="false" />
           <Property Name="CountryID" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="PagesCount" Type="int" />
           <Property Name="Picture" Type="nvarchar" MaxLength="300" />
@@ -361,7 +361,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AuthorID" Type="Int32" Nullable="false" />
           <Property Name="CountryID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="PagesCount" Type="Int32" />
           <Property Name="Picture" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />

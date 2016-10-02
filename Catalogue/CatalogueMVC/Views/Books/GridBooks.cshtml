@@ -69,10 +69,7 @@
                         <i class="glyphicon glyphicon-pencil"></i>
                         <span class="sr-only">Edit</span>
                     </a>
-                    @*|
-                    <p style="display:inline-block">
-                        @Html.ActionLink("Delete", "Delete", new { id = item.BookID })
-                    </p>*@
+
                     <a style="background-color:white;" class="btn" href="@Url.Action("Delete", new { id = @item.BookID })">
                         <i class="glyphicon glyphicon-trash"></i>
                         <span class="sr-only">Delete</span>

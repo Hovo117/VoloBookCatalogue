@@ -11,7 +11,6 @@ namespace BooksEntitiesDAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Country
     {
@@ -22,13 +21,7 @@ namespace BooksEntitiesDAL
         }
     
         public int CountryID { get; set; }
-
-        [Required(ErrorMessage ="The field Country must be filled")]
-        [Display(Name ="Country")]
         public string Country1 { get; set; }
-
-        [Required(ErrorMessage ="The field Tel. Code must be filled")]
-        [Display(Name ="Tel. Code")]
         public int TelCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

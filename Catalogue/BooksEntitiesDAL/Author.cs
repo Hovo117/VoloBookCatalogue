@@ -11,7 +11,6 @@ namespace BooksEntitiesDAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Author
     {
@@ -22,13 +21,7 @@ namespace BooksEntitiesDAL
         }
     
         public int AuthorID { get; set; }
-
-        [Required(ErrorMessage ="The field Full Name must be filled in")]
-        [Display(Name ="Full Name")]
         public string FullName { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime BirthDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
