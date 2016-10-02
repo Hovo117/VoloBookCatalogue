@@ -190,3 +190,8 @@ footer {
 tr:hover{
     background: rgba(238, 238, 238, .5);
 }
+
+span.l1 {
+    font-size: 2em;
+    margin-top:15px;
+}

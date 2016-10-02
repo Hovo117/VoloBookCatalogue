@@ -65,14 +65,12 @@
             <td>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a style="background-color:white;" class="btn" href="@Url.Action("Edit", new { id = @item.BookID })">
-                        <i class="glyphicon glyphicon-pencil"></i>
-                        <span class="sr-only">Edit</span>
+                    <a title="Edit" style="background-color:white;" class="btn" href="@Url.Action("Edit", new { id = @item.BookID })">
+                        <span class="glyphicon glyphicon-pencil"></span>
                     </a>
 
-                    <a style="background-color:white;" class="btn" href="@Url.Action("Delete", new { id = @item.BookID })">
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <span class="sr-only">Delete</span>
+                    <a title="Delete" style="background-color:white;" class="btn" href="@Url.Action("Delete", new { id = @item.BookID })">
+                        <span class="glyphicon glyphicon-trash"></span>
                     </a>
                 }
             </td>

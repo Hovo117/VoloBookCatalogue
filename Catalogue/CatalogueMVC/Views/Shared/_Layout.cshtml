@@ -22,9 +22,9 @@
         </div>
 
         <div class="collapse navbar-collapse row" id="bs-example-navbar-collapse-1">
-            @if (User.Identity.IsAuthenticated)
+            <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
             {
-                <ul class="nav navbar-nav">
                     <li class="active">@Html.ActionLink("Authors", "Index", "Authors")</li>
                     <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
                     <li class="dropdown">
@@ -35,8 +35,8 @@
                             <li>@Html.ActionLink("Country", "Create", "Countries")</li>
                         </ul>
                     </li>
-                </ul>
-            }
+                }
+            </ul>
 
             <div style="margin-right:45px;">
                 @Html.Partial("_LoginPartial")
@@ -51,9 +51,6 @@
         <hr />
         <p>&copy; @DateTime.Now.Year - Books Catalogue</p>
     </footer>
-
-
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

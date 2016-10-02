@@ -4,6 +4,10 @@
     ViewBag.Title = "Details";
 }
 
+<p>
+    <a title="Edit" href="@Url.Action("Edit",new { id = Model.BookID })"><span class="glyphicon glyphicon-pencil l1"></span> </a>
+</p>
+
 
 <div>
     <hr />
@@ -68,6 +72,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BookID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a title="Go Back" href="@Url.Action("Index")"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
 </p>

@@ -34,3 +34,5 @@ $(function () {
         }
     });
 });
+
+$(":file").filestyle({ buttonBefore: true });
