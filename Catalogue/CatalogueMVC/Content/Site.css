@@ -195,3 +195,8 @@ span.l1 {
     font-size: 2em;
     margin-top:15px;
 }
+
+.l1:hover{
+    color:white;
+    text-shadow: 0 0 10px #2f44c4;
+}
