@@ -12,6 +12,7 @@ using System.IO;
 using System.ComponentModel.DataAnnotations;
 using PagedList;
 using System.Web.Helpers;
+using CatalogueMVC.BooksViewModel;
 
 namespace CatalogueMVC.Controllers
 {
@@ -28,62 +29,66 @@ namespace CatalogueMVC.Controllers
 
             int pageSize = 3;
 
-            var books = db.Books.AsQueryable();
+            var books = db.Books.ToList();
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString));
+                books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString)).ToList();
                 if (!books.Any())
                 {
                     return PartialView("NotFound", searchString);
                 }
             }
 
+            BooksListModel blm = new BooksListModel();
+            blm.BooksList = GetBooksList.GetResult(books);
+            var bm = blm.BooksList;
+
             switch (sortOption)
             {
                 case "title_acs":
-                    books = books.OrderBy(p => p.Title);
+                    bm = bm.OrderBy(p => p.Title).ToList();
                     break;
                 case "title_desc":
-                    books = books.OrderByDescending(p => p.Title);
+                    bm = bm.OrderByDescending(p => p.Title).ToList();
                     break;
                 case "author_acs":
-                    books = books.OrderBy(p => p.AuthorID);
+                    bm = bm.OrderBy(p => p.AuthorID).ToList();
                     break;
                 case "author_desc":
-                    books = books.OrderByDescending(p => p.AuthorID);
+                    bm = bm.OrderByDescending(p => p.AuthorID).ToList();
                     break;
                 case "country_acs":
-                    books = books.OrderBy(p => p.CountryID);
+                    bm = bm.OrderBy(p => p.CountryID).ToList();
                     break;
                 case "country_desc":
-                    books = books.OrderByDescending(p => p.CountryID);
+                    bm = bm.OrderByDescending(p => p.CountryID).ToList();
                     break;
                 case "pages_acs":
-                    books = books.OrderBy(p => p.PagesCount);
+                    bm = bm.OrderBy(p => p.PagesCount).ToList();
                     break;
                 case "pages_desc":
-                    books = books.OrderByDescending(p => p.PagesCount);
+                    bm = bm.OrderByDescending(p => p.PagesCount).ToList();
                     break;
                 case "price_acs":
-                    books = books.OrderBy(p => p.Price);
+                    bm = bm.OrderBy(p => p.TotalPrice).ToList();
                     break;
                 case "price_desc":
-                    books = books.OrderByDescending(p => p.Price);
+                    bm = bm.OrderByDescending(p => p.TotalPrice).ToList();
                     break;
                 default:
-                    books = books.OrderBy(p => p.BookID);
+                    bm = bm.OrderBy(p => p.BookID).ToList();
                     break;
             }
 
-            if (page > books.ToPagedList(page, pageSize).PageCount)
+            if (page > bm.ToPagedList(page, pageSize).PageCount)
             {
                 page = 1;
             }
 
             return Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("GridBooks", books.ToPagedList(page, pageSize))
-                : View(books.ToPagedList(page, pageSize));
+                ? (ActionResult)PartialView("GridBooks", bm.ToPagedList(page, pageSize))
+                : View(bm.ToPagedList(page, pageSize));
             //}
             //catch (Exception ex)
             //{

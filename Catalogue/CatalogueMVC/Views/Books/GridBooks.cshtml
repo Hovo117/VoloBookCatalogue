@@ -1,5 +1,5 @@
 ﻿@using PagedList.Mvc
-@model PagedList.IPagedList<BooksEntitiesDAL.Book>
+@model PagedList.IPagedList<CatalogueMVC.BooksViewModel.BookModel>
 
 @Styles.Render("~/Content/css")
 
@@ -53,10 +53,10 @@
                 @Html.DisplayFor(modelItem => item.Country.Country1)
             </td>
             <td>
-                @{  decimal totalPrice = item.Price + item.Country.TelCode;
+                @*@{  decimal totalPrice = item.Price + item.Country.TelCode;
                     var price = totalPrice.ToString("C2");
-                }
-                @Html.DisplayFor(modelItem => price)
+                }*@
+                @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PagesCount)
@@ -78,7 +78,5 @@
         </tr>
                     }
 </table>
-
-
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
