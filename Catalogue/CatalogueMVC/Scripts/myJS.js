@@ -63,21 +63,21 @@ $(function () {
 
         var sort;
         switch (currentSortOption) {
-            case "price_acs": sort = "sortOption=price_acs"; break;
-            case "price_desc": sort = "sortOption=price_desc"; break;
-            case "title_acs": sort = "sortOption=title_acs"; break;
-            case "title_desc": sort = "sortOption=title_desc"; break;
-            case "author_acs": sort = "sortOption=author_acs"; break;
-            case "author_desc": sort = "sortOption=author_desc"; break;
-            case "country_acs": sort = "sortOption=country_acs"; break;
-            case "country_desc": sort = "sortOption=country_desc"; break;
-            case "pages_acs": sort = "sortOption=pages_acs"; break;
-            case "pages_desc": sort = "sortOption=pages_desc"; break;
+            case "price_acs": sort = "&sortOption=price_acs"; break;
+            case "price_desc": sort = "&sortOption=price_desc"; break;
+            case "title_acs": sort = "&sortOption=title_acs"; break;
+            case "title_desc": sort = "&sortOption=title_desc"; break;
+            case "author_acs": sort = "&sortOption=author_acs"; break;
+            case "author_desc": sort = "&sortOption=author_desc"; break;
+            case "country_acs": sort = "&sortOption=country_acs"; break;
+            case "country_desc": sort = "&sortOption=country_desc"; break;
+            case "pages_acs": sort = "&sortOption=pages_acs"; break;
+            case "pages_desc": sort = "&sortOption=pages_desc"; break;
 
             default: sort = ""; break;
         }
 
-        var url = $(this).attr('href') + searchString + '&' + sort;
+        var url = $(this).attr('href') + searchString + sort;
 
         console.log(url);
         $.ajax({
