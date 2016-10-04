@@ -33,16 +33,14 @@ namespace CatalogueMVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString)).ToList();
+                books = (db.Books.Include(b => b.Author).Include(b => b.Country).Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString))).ToList();
                 if (!books.Any())
                 {
                     return PartialView("NotFound", searchString);
                 }
             }
 
-            BooksListModel blm = new BooksListModel();
-            blm.BooksList = GetBooksList.GetResult(books);
-            var bm = blm.BooksList;
+            List<BookModel> bm = GetBooksList.GetResult(books);
 
             switch (sortOption)
             {
@@ -83,7 +81,7 @@ namespace CatalogueMVC.Controllers
 
             if (page > bm.ToPagedList(page, pageSize).PageCount)
             {
-                page = 1;
+                return RedirectToAction("Index");
             }
 
             return Request.IsAjaxRequest()

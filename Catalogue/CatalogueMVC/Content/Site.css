@@ -187,8 +187,12 @@ footer {
      transform:scale(1.50);
 }
 
+tr{
+    background :rgba(238, 238, 238, .4);
+}
+
 tr:hover{
-    background: rgba(238, 238, 238, .5);
+    background: rgba(179, 179, 179, .5);
 }
 
 span.l1 {

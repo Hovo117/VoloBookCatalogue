@@ -3,10 +3,15 @@
 @{
     ViewBag.Title = "Details";
 }
+<div>
 
-<p>
-    <a title="Edit" href="@Url.Action("Edit",new { id = Model.BookID })"><span class="glyphicon glyphicon-pencil l1"></span> </a>
-</p>
+    <h2 style="display:inline-block">" @Model.Title "</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+            <a title="Edit" href="@Url.Action("Edit",new { id = Model.BookID })" style="margin-left:30px;"><span class="glyphicon glyphicon-pencil l1"></span> </a>
+    }
+
+</div>
 
 
 <div>
@@ -14,18 +19,18 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @*@Html.DisplayNameFor(model => model.Picture)*@
+
         </dt>
 
         <dd>
             <img src="~/Images/@Model.Picture" alt="Img" />
         </dd>
 
-        <dt>
+        <dt style="margin-top:10px;">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
 
-        <dd>
+        <dd style="margin-top:10px;">
             @Html.DisplayFor(model => model.Title)
         </dd>
 
@@ -57,7 +62,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
-        <dd>
+        <dd style="max-width:600px;">
             @Html.DisplayFor(model => model.Description)
         </dd>
 
@@ -72,5 +77,5 @@
     </dl>
 </div>
 <p>
-    <a title="Go Back" href="@Url.Action("Index")"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
+    <a title="Go Back" href="javascript:history.back()"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
 </p>
