@@ -120,8 +120,6 @@
       <DependentUpon>BookModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Scripts\jquery-3.1.0.min.map" />
-    <None Include="Scripts\jquery-3.1.0.slim.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BookModel.Context.tt">
@@ -134,14 +132,6 @@
       <DependentUpon>BookModel.edmx</DependentUpon>
       <LastGenOutput>BookModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Content\PagedList.css" />
-    <Content Include="Scripts\jquery-3.1.0.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.0.js" />
-    <Content Include="Scripts\jquery-3.1.0.min.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

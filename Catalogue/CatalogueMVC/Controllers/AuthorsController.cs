@@ -12,6 +12,7 @@ using BooksEntitiesDAL;
 
 namespace CatalogueMVC.Controllers
 {
+    [HandleError]
     public class AuthorsController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
@@ -45,8 +46,6 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Authors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -79,8 +78,6 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Authors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

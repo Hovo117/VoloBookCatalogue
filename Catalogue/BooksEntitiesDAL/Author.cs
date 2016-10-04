@@ -28,6 +28,7 @@ namespace BooksEntitiesDAL
         public string FullName { get; set; }
 
         [Required(ErrorMessage ="The BirthDate must be filled")]
+        [Display(Name ="Birth Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime BirthDate { get; set; }

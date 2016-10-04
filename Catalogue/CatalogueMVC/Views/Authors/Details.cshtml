@@ -4,14 +4,21 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div>
+
+    <h2 style="display:inline-block">@Model.FullName</h2>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a title="Edit" href="@Url.Action("Edit",new { id = Model.AuthorID })" style="margin-left:30px;"><span class="glyphicon glyphicon-pencil l1"></span> </a>
+    }
+
+</div>
 
 <div>
-    <h4>Author</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal" style="font-size:larger;">
         <dt>
-            @Html.DisplayNameFor(model => model.FullName)
+            @Html.DisplayNameFor(model => model.FullName) :
         </dt>
 
         <dd>
@@ -19,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+            @Html.DisplayNameFor(model => model.BirthDate) :
         </dt>
 
         <dd>
@@ -29,6 +36,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.AuthorID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a title="Go Back" href="javascript:history.back()"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
 </p>

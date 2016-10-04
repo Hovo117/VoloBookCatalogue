@@ -53,9 +53,6 @@
                 @Html.DisplayFor(modelItem => item.Country.Country1)
             </td>
             <td>
-                @*@{  decimal totalPrice = item.Price + item.Country.TelCode;
-                    var price = totalPrice.ToString("C2");
-                }*@
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
@@ -65,7 +62,7 @@
             <td>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a title="Edit" style="background-color:white;" class="btn l2" href="@Url.Action("Edit", new { id = @item.BookID })">
+                    <a title="Edit" style="background-color:white;" class="btn" href="@Url.Action("Edit", new { id = @item.BookID })">
                         <span class="glyphicon glyphicon-pencil "></span>
                     </a>
 

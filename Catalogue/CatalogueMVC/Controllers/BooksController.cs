@@ -16,6 +16,7 @@ using CatalogueMVC.BooksViewModel;
 
 namespace CatalogueMVC.Controllers
 {
+    [HandleError]
     public class BooksController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
@@ -24,74 +25,74 @@ namespace CatalogueMVC.Controllers
         // GET: Books
         public ActionResult Index(string searchString, string sortOption, int page = 1)
         {
-            //try
-            //{
-
-            int pageSize = 3;
-
-            var books = db.Books.ToList();
-
-            if (!String.IsNullOrEmpty(searchString))
+            try
             {
-                books = (db.Books.Include(b => b.Author).Include(b => b.Country).Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString))).ToList();
-                if (!books.Any())
+
+                int pageSize = 3;
+
+                var books = db.Books.ToList();
+
+                if (!String.IsNullOrEmpty(searchString))
                 {
-                    return PartialView("NotFound", searchString);
+                    books = (db.Books.Include(b => b.Author).Include(b => b.Country).Where(n => n.Title.Contains(searchString) || n.Author.FullName.Contains(searchString))).ToList();
+                    if (!books.Any())
+                    {
+                        return PartialView("NotFound", searchString);
+                    }
                 }
+
+                List<BookModel> bm = GetBooksList.GetResult(books);
+
+                switch (sortOption)
+                {
+                    case "title_acs":
+                        bm = bm.OrderBy(p => p.Title).ToList();
+                        break;
+                    case "title_desc":
+                        bm = bm.OrderByDescending(p => p.Title).ToList();
+                        break;
+                    case "author_acs":
+                        bm = bm.OrderBy(p => p.AuthorID).ToList();
+                        break;
+                    case "author_desc":
+                        bm = bm.OrderByDescending(p => p.AuthorID).ToList();
+                        break;
+                    case "country_acs":
+                        bm = bm.OrderBy(p => p.CountryID).ToList();
+                        break;
+                    case "country_desc":
+                        bm = bm.OrderByDescending(p => p.CountryID).ToList();
+                        break;
+                    case "pages_acs":
+                        bm = bm.OrderBy(p => p.PagesCount).ToList();
+                        break;
+                    case "pages_desc":
+                        bm = bm.OrderByDescending(p => p.PagesCount).ToList();
+                        break;
+                    case "price_acs":
+                        bm = bm.OrderBy(p => p.TotalPrice).ToList();
+                        break;
+                    case "price_desc":
+                        bm = bm.OrderByDescending(p => p.TotalPrice).ToList();
+                        break;
+                    default:
+                        bm = bm.OrderBy(p => p.BookID).ToList();
+                        break;
+                }
+
+                if (page > bm.ToPagedList(page, pageSize).PageCount)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                return Request.IsAjaxRequest()
+                    ? (ActionResult)PartialView("GridBooks", bm.ToPagedList(page, pageSize))
+                    : View(bm.ToPagedList(page, pageSize));
             }
-
-            List<BookModel> bm = GetBooksList.GetResult(books);
-
-            switch (sortOption)
+            catch (Exception ex)
             {
-                case "title_acs":
-                    bm = bm.OrderBy(p => p.Title).ToList();
-                    break;
-                case "title_desc":
-                    bm = bm.OrderByDescending(p => p.Title).ToList();
-                    break;
-                case "author_acs":
-                    bm = bm.OrderBy(p => p.AuthorID).ToList();
-                    break;
-                case "author_desc":
-                    bm = bm.OrderByDescending(p => p.AuthorID).ToList();
-                    break;
-                case "country_acs":
-                    bm = bm.OrderBy(p => p.CountryID).ToList();
-                    break;
-                case "country_desc":
-                    bm = bm.OrderByDescending(p => p.CountryID).ToList();
-                    break;
-                case "pages_acs":
-                    bm = bm.OrderBy(p => p.PagesCount).ToList();
-                    break;
-                case "pages_desc":
-                    bm = bm.OrderByDescending(p => p.PagesCount).ToList();
-                    break;
-                case "price_acs":
-                    bm = bm.OrderBy(p => p.TotalPrice).ToList();
-                    break;
-                case "price_desc":
-                    bm = bm.OrderByDescending(p => p.TotalPrice).ToList();
-                    break;
-                default:
-                    bm = bm.OrderBy(p => p.BookID).ToList();
-                    break;
+                throw ex;
             }
-
-            if (page > bm.ToPagedList(page, pageSize).PageCount)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return Request.IsAjaxRequest()
-                ? (ActionResult)PartialView("GridBooks", bm.ToPagedList(page, pageSize))
-                : View(bm.ToPagedList(page, pageSize));
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
         }
 
         // GET: Books/Details/5
@@ -128,45 +129,43 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Books/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            //try
-            //{
-            if (ModelState.IsValid)
+            try
             {
-                if (file != null && file.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                    WebImage img = new WebImage(file.InputStream);
-                    if (img.Width > 270)
-                        img.Resize(260, 400);
-                    img.Save(path);
-                    book.Picture = fileName;
-                }
-                else
-                {
-                    book.Picture = _noImage;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        WebImage img = new WebImage(file.InputStream);
+                        if (img.Width > 270)
+                            img.Resize(260, 400);
+                        img.Save(path);
+                        book.Picture = fileName;
+                    }
+                    else
+                    {
+                        book.Picture = _noImage;
+                    }
+
+                    db.Books.Add(book);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
 
-                db.Books.Add(book);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
+                ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
+                return View(book);
             }
-
-            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
-            return View(book);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: Books/Edit/5
@@ -196,62 +195,60 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Books/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
         {
-            //try
-            //{
-            string pic = "";
-            using (db1)
+            try
             {
-                pic = db1.Books.Find(book.BookID).Picture;
-            }
-            if (ModelState.IsValid)
-            {
-                if (file != null && file.ContentLength > 0)
+                string pic = "";
+                using (db1)
                 {
-                    var allowedExtensions = new[] { ".jpg", ".png", ".jpeg" };
-                    var checkextension = Path.GetExtension(file.FileName).ToLower();
-
-                    if (!allowedExtensions.Contains(checkextension))
+                    pic = db1.Books.Find(book.BookID).Picture;
+                }
+                if (ModelState.IsValid)
+                {
+                    if (file != null && file.ContentLength > 0)
                     {
-                        return RedirectToAction("Index");
+                        var allowedExtensions = new[] { ".jpg", ".png", ".jpeg" };
+                        var checkextension = Path.GetExtension(file.FileName).ToLower();
+
+                        if (!allowedExtensions.Contains(checkextension))
+                        {
+                            return RedirectToAction("Index");
+                        }
+
+                        if (pic != _noImage)
+                        {
+                            System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));
+                        }
+
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        WebImage img = new WebImage(file.InputStream);
+                        if (img.Width > 270)
+                            img.Resize(260, 400);
+                        img.Save(path);
+                        book.Picture = fileName;
+                    }
+                    else
+                    {
+                        book.Picture = pic;
                     }
 
-                    if (pic != _noImage)
-                    {
-                        System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));
-                    }
-
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                    WebImage img = new WebImage(file.InputStream);
-                    if (img.Width > 270)
-                        img.Resize(260, 400);
-                    img.Save(path);
-                    book.Picture = fileName;
+                    db.Entry(book).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
-                else
-                {
-                    book.Picture = pic;
-                }
-
-                db.Entry(book).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
+                ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
+                return View(book);
             }
-            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
-            return View(book);
-            //}
-            //catch(Exception ex)
-            //{
-            //    throw ex;
-            //}
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
 

@@ -4,11 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2></h2>
+<h2>Authors</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -20,20 +17,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AuthorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AuthorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AuthorID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="#" onclick="@("window.location.href='" + @Url.Action("Details", "Authors",new { id = item.AuthorID }) + "'");event.preventDefault();">
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a title="Edit" style="background-color:white;" class="btn" href="@Url.Action("Edit", new { id = @item.AuthorID })">
+                        <span class="glyphicon glyphicon-pencil "></span>
+                    </a>
+
+                    <a title="Delete" style="background-color:white;" class="btn" href="@Url.Action("Delete", new { id = @item.AuthorID })">
+                        <span class="glyphicon glyphicon-trash "></span>
+                    </a>
+                }
+            </td>
+        </tr>
+    }
 
 </table>
