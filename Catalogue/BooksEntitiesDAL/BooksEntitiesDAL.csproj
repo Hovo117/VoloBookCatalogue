@@ -78,6 +78,9 @@
     <Compile Include="Attribute_Book.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Attribute_Value.cs">
+      <DependentUpon>BookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Author.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
@@ -113,8 +116,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BookModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
     <None Include="BookModel.edmx.diagram">
       <DependentUpon>BookModel.edmx</DependentUpon>
@@ -122,10 +123,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="BookModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BookModel.Context.cs</LastGenOutput>
       <DependentUpon>BookModel.edmx</DependentUpon>
+      <LastGenOutput>BookModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="BookModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -133,10 +137,6 @@
       <LastGenOutput>BookModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

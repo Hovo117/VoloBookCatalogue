@@ -11,9 +11,7 @@ namespace BooksEntitiesDAL
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using Validate;
-
+    
     public partial class Book
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,32 +19,16 @@ namespace BooksEntitiesDAL
         {
             this.Attribute_Book = new HashSet<Attribute_Book>();
         }
-
+    
         public int BookID { get; set; }
-
-        [Required(ErrorMessage = "The field Title must be filled")]
         public string Title { get; set; }
-
-        [Required(ErrorMessage = "The field Author must be filled")]
-        [Display(Name = "Author")]
         public int AuthorID { get; set; }
-
-        [Display(Name = "Country")]
-        [Required(ErrorMessage = "The field Country must be filled")]
         public int CountryID { get; set; }
-
-        [Required(ErrorMessage = "The field Price must be filled")]
-        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
-
         public string Description { get; set; }
-
-        [Display(Name = "Pages")]
         public Nullable<int> PagesCount { get; set; }
-
-        [ValidateFile]
         public string Picture { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attribute_Book> Attribute_Book { get; set; }
         public virtual Author Author { get; set; }

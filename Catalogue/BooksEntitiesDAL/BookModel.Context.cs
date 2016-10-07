@@ -31,6 +31,7 @@ namespace BooksEntitiesDAL
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Attribute_Book> Attribute_Book { get; set; }
+        public virtual DbSet<Attribute_Value> Attribute_Value { get; set; }
         public virtual DbSet<Attribute> Attributes { get; set; }
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Book> Books { get; set; }
