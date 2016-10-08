@@ -67,8 +67,10 @@
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <img src="~/Images/@Model.Picture" alt="Img" width="100" height="150" />
+                <div style="margin-top:10px;">
                 <input type="file" name="file" id="file" class="filestyle" data-buttonBefore="true">
                 @Html.ValidationMessageFor(m => m.Picture, string.Empty, new { id = "validationTxt", @class = "text-danger" })
+                </div>
             </div>
         </div>
 

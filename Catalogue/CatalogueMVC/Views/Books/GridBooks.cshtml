@@ -36,6 +36,7 @@
     </tr>
     @foreach (var item in Model)
     {
+        @*@item.Attribute_Book.First()?.Attribute?.Name*@
         <tr>
 
             <td class="image">
@@ -53,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.Country.Country1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
+               $ @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PagesCount)

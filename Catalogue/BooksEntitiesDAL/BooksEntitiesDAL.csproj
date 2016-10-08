@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -78,7 +79,7 @@
     <Compile Include="Attribute_Book.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Attribute_Value.cs">
+    <Compile Include="Attribute_Type.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Author.cs">

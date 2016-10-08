@@ -18,16 +18,14 @@ namespace BooksEntitiesDAL
         public Attribute()
         {
             this.Attribute_Book = new HashSet<Attribute_Book>();
-            this.Attribute_Value = new HashSet<Attribute_Value>();
         }
     
         public int AttributeID { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public int AttTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Attribute_Book> Attribute_Book { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attribute_Value> Attribute_Value { get; set; }
+        public virtual Attribute_Type Attribute_Type { get; set; }
     }
 }
