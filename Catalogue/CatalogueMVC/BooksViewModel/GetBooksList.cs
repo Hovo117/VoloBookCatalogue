@@ -30,8 +30,27 @@ namespace CatalogueMVC.BooksViewModel
                     Attribute_Book = item.Attribute_Book
                 });
             }
-
             return gr;
         }
+
+        public static Book Create(BookModel model)
+        {
+            Book book = new Book
+            {
+                BookID = model.BookID,
+                Title = model.Title,
+                PagesCount = model.PagesCount,
+                Description = model.Description,
+                Price = model.Price,
+                Picture = model.Picture,
+                AuthorID = model.AuthorID,
+                CountryID = model.CountryID,
+                Author = model.Author,
+                Country = model.Country,
+                Attribute_Book = model.Attribute_Book
+            };
+            return book;
+        }
+
     }
 }

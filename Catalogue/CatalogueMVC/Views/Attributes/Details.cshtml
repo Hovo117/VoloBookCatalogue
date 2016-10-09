@@ -19,11 +19,18 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Attribute_Type.Name)
+            @Html.DisplayNameFor(model => model.Attribute_Type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Attribute_Type.Name)
+                @Html.DisplayFor(model => model.Attribute_Book)
+                @{
+                    var extAtt = Model.Attribute_Book.FirstOrDefault();
+                    if (extAtt != null)
+                    {
+                        @Html.DisplayFor(m => extAtt.ValueTypeText);
+                    }
+                }
         </dd>
 
     </dl>

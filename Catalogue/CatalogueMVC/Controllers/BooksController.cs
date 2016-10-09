@@ -118,7 +118,7 @@ namespace CatalogueMVC.Controllers
         {
             try
             {
-                ViewBag.AttributeID = new SelectList(db.Attributes.ToList(), "AttributeID", "Name");
+                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName");
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1");
                 return View();
@@ -159,6 +159,7 @@ namespace CatalogueMVC.Controllers
                     return RedirectToAction("Index");
                 }
 
+                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
                 return View(book);
