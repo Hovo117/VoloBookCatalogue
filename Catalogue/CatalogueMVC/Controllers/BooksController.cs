@@ -16,7 +16,7 @@ using CatalogueMVC.BooksViewModel;
 
 namespace CatalogueMVC.Controllers
 {
-    [HandleError]
+    //[HandleError]
     public class BooksController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
@@ -118,6 +118,7 @@ namespace CatalogueMVC.Controllers
         {
             try
             {
+                ViewBag.AttributeID = new SelectList(db.Attributes.ToList(), "AttributeID", "Name");
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName");
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1");
                 return View();
@@ -132,7 +133,7 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] Book book, HttpPostedFileBase file)
         {
             try
             {

@@ -70,6 +70,24 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Attribute_Book, "Attributes", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" })
+                @*@Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })*@
+                @*<select name="listbox" id="listbox">
+                        @foreach (var item in ViewBag.AttList)
+                        {
+
+                            <option value="@item.Name">
+                                @item.Name
+                            </option>
+                        }
+                    </select>*@
+            <input type="text" hidden id="hiddenInput"/>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -85,4 +103,17 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/imageJs.js"></script>
     <script src="~/Scripts/bootstrap-filestyle.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#dd1').change(function () {
+                var value = $(this).val();
+                if (value == '1') {
+                    $('#hiddenInput').show();
+                } else {
+                    $('#hiddenInput').hide();
+                }
+            });
+        });
+    </script>
 }

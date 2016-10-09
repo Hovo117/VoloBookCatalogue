@@ -180,6 +180,7 @@
     <Compile Include="BooksViewModel\BookModel.cs" />
     <Compile Include="BooksViewModel\GetBooksList.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AttributesController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
@@ -295,6 +296,11 @@
     <Content Include="Views\Countries\Index.cshtml" />
     <Content Include="Views\Books\GridBooks.cshtml" />
     <Content Include="Views\Books\NotFound.cshtml" />
+    <Content Include="Views\Attributes\Create.cshtml" />
+    <Content Include="Views\Attributes\Delete.cshtml" />
+    <Content Include="Views\Attributes\Details.cshtml" />
+    <Content Include="Views\Attributes\Edit.cshtml" />
+    <Content Include="Views\Attributes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

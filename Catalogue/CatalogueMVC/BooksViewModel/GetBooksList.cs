@@ -26,7 +26,8 @@ namespace CatalogueMVC.BooksViewModel
                     Author = item.Author,
                     Country = item.Country,
                     Picture = item.Picture,
-                    TotalPrice = item.Country.TelCode + item.Price
+                    TotalPrice = item.Country.TelCode + item.Price,
+                    Attribute_Book = item.Attribute_Book
                 });
             }
 
