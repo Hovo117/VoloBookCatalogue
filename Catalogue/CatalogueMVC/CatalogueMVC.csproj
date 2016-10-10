@@ -178,7 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BooksViewModel\BookModel.cs" />
-    <Compile Include="BooksViewModel\GetBooksList.cs" />
+    <Compile Include="BooksViewModel\GetBooks.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AttributesController.cs" />
     <Compile Include="Controllers\AuthorsController.cs" />

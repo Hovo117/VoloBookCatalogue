@@ -1,4 +1,4 @@
-﻿@model BooksEntitiesDAL.Book
+﻿@model CatalogueMVC.BooksViewModel.BookModel
 
 @{
     ViewBag.Title = "Details";
@@ -80,6 +80,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.Attribute_Book)
+            @{
+                var extAtt = Model.Attribute_Book.FirstOrDefault();
+                if (extAtt != null)
+                {
+                    @extAtt.ValueTypeText
+                }
+            }
         </dd>
 
     </dl>

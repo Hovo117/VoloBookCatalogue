@@ -41,7 +41,7 @@ namespace CatalogueMVC.Controllers
                     }
                 }
 
-                List<BookModel> bm = GetBooksList.GetResult(books);
+                List<BookModel> bm = GetBooks.GetResult(books);
 
                 switch (sortOption)
                 {
@@ -102,12 +102,16 @@ namespace CatalogueMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //Book book = await db.Books.Include(b=>b.Attribute_Book).FirstOrDefaultAsync(b=>b.BookID==id);
             Book book = await db.Books.FindAsync(id);
+
+            BookModel model = GetBooks.Details(book);
+
             if (book == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(model);
         }
 
         const string _noImage = "no-image.png";

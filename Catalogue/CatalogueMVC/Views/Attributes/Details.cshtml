@@ -19,18 +19,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Attribute_Type)
+            @Html.DisplayNameFor(model => model.AttTypeID)
         </dt>
 
         <dd>
-                @Html.DisplayFor(model => model.Attribute_Book)
+            @Html.DisplayFor(model=> model.AttTypeID)
+            @*@Html.DisplayFor(model => model.Attribute_Book)
                 @{
                     var extAtt = Model.Attribute_Book.FirstOrDefault();
                     if (extAtt != null)
                     {
                         @Html.DisplayFor(m => extAtt.ValueTypeText);
                     }
-                }
+                }*@
+            @*@foreach (var item in Model.Attribute_Book)
+            {
+                    @item.ValueTypeText
+            }*@
         </dd>
 
     </dl>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CatalogueMVC.BooksViewModel
 {
-    public class GetBooksList
+    public class GetBooks
     {
         public static List<BookModel> GetResult(IEnumerable<Book> books)
         {
@@ -50,6 +50,26 @@ namespace CatalogueMVC.BooksViewModel
                 Attribute_Book = model.Attribute_Book
             };
             return book;
+        }
+
+        public static BookModel Details(Book item)
+        {
+            var model = new BookModel
+            {
+                BookID = item.BookID,
+                Title = item.Title,
+                PagesCount = Convert.ToInt32(item.PagesCount),
+                Description = item.Description,
+                Price = item.Price,
+                CountryID = item.CountryID,
+                AuthorID = item.AuthorID,
+                Author = item.Author,
+                Country = item.Country,
+                Picture = item.Picture,
+                TotalPrice = item.Country.TelCode + item.Price,
+                Attribute_Book = item.Attribute_Book.ToList()
+            };
+            return model;
         }
 
     }
