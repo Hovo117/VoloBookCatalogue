@@ -69,14 +69,17 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*Extra attribute part*@
+
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Attribute_Book, "Attributes", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" })
-                @*@Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })*@
-                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText" , style = "display:none" , Name = "attText" })
+                @Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })
+
+                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText" , style = "display:none;margin-top:10px;border-radius:5px;" , Name = "attText" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -95,7 +98,9 @@
     <script src="~/Scripts/imageJs.js"></script>
     <script src="~/Scripts/bootstrap-filestyle.js"></script>
 
-    <script type="text/javascript">
+    @*hidden input script*@
+
+    @*<script type="text/javascript">
         $(function () {
             $('#dd1').change(function () {
                 var value = $(this).val();
@@ -106,5 +111,5 @@
                 }
             });
         });
-    </script>
+    </script>*@
 }

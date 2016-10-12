@@ -20,6 +20,7 @@ namespace CatalogueMVC.Controllers
     public class BooksController : Controller
     {
         private BooksCatalogueDBEntities db = new BooksCatalogueDBEntities();
+        // used 2nd dbcontext to get picture name while edit(with default one it was throwing error)
         private BooksCatalogueDBEntities db1 = new BooksCatalogueDBEntities();
 
         // GET: Books
@@ -96,14 +97,16 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Books/Details/5
+        //modified details action to work with viewmodel to get values from Attribute_View ,but it's not working correctly till now
+        //and showing Attribute name with proxy and then value
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //Book book = await db.Books.Include(b=>b.Attribute_Book).FirstOrDefaultAsync(b=>b.BookID==id);
-            Book book = await db.Books.FindAsync(id);
+            Book book = await db.Books.Include(b => b.Attribute_Book).FirstOrDefaultAsync(b => b.BookID == id);
+            //Book book = await db.Books.FindAsync(id);
 
             BookModel model = GetBooks.Details(book);
 
@@ -117,6 +120,7 @@ namespace CatalogueMVC.Controllers
         const string _noImage = "no-image.png";
 
         // GET: Books/Create
+        //modified to get lists of Attributes , didtn finished it whole
         [Authorize]
         public ActionResult Create()
         {
@@ -137,7 +141,7 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] Book book, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] Book book, HttpPostedFileBase file/*, string attText*/)
         {
             try
             {
@@ -157,6 +161,22 @@ namespace CatalogueMVC.Controllers
                     {
                         book.Picture = _noImage;
                     }
+
+                    //Extra Attribute part
+
+                    //using (db1)
+                    //{
+                    //    var attBook = new Attribute_Book();
+                    //    var att = new BooksEntitiesDAL.Attribute();
+
+                    //    //trying write some data in Attribute_Book table
+                    //    db1.Attribute_Book.Add(attBook);
+                        
+                    //    attBook.BookID = book.BookID;
+                    //    attBook.AttributeID = att.AttributeID;
+                    //    attBook.ValueTypeText = attText;
+
+                    //}
 
                     db.Books.Add(book);
                     await db.SaveChangesAsync();
@@ -217,14 +237,6 @@ namespace CatalogueMVC.Controllers
                 {
                     if (file != null && file.ContentLength > 0)
                     {
-                        var allowedExtensions = new[] { ".jpg", ".png", ".jpeg" };
-                        var checkextension = Path.GetExtension(file.FileName).ToLower();
-
-                        if (!allowedExtensions.Contains(checkextension))
-                        {
-                            return RedirectToAction("Index");
-                        }
-
                         if (pic != _noImage)
                         {
                             System.IO.File.Delete(Path.Combine(Server.MapPath("~/Images"), pic));

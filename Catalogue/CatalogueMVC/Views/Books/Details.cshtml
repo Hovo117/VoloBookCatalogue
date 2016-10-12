@@ -78,8 +78,11 @@
             @Html.DisplayNameFor(model => model.Attribute_Book)
         </dt>
 
-        <dd>
+        @*<dd>
             @Html.DisplayFor(model => model.Attribute_Book)
+
+            Not fully working part of Attribute_Book
+
             @{
                 var extAtt = Model.Attribute_Book.FirstOrDefault();
                 if (extAtt != null)
@@ -87,10 +90,10 @@
                     @extAtt.ValueTypeText
                 }
             }
-        </dd>
+        </dd>*@
 
     </dl>
 </div>
 <p>
-    <a title="Go Back" href="javascript:history.back()"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
+    <a title="Go Back" href="@Url.Action("Index","Books")"><span class="glyphicon glyphicon-arrow-left l1"></span> </a>
 </p>

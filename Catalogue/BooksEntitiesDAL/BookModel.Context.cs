@@ -18,6 +18,9 @@ namespace BooksEntitiesDAL
         public BooksCatalogueDBEntities()
             : base("name=BooksCatalogueDBEntities")
         {
+            //tried to dissable proxy creation to get values without proxy but it throws errors, after 2 days still errors , commenting it
+            //this.Configuration.ProxyCreationEnabled = false;
+            //this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

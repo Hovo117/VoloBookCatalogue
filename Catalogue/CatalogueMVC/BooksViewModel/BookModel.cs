@@ -10,6 +10,11 @@ namespace CatalogueMVC.BooksViewModel
 {
     public class BookModel
     {
+        public BookModel()
+        {
+            this.Attribute_Book = new HashSet<Attribute_Book>();
+        }
+
         public int BookID { get; set; }
 
         [Required(ErrorMessage = "The field Title must be filled")]
