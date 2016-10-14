@@ -97,8 +97,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Books/Details/5
-        //modified details action to work with viewmodel to get values from Attribute_View ,but it's not working correctly till now
-        //and showing Attribute name with proxy and then value
+        //modified details action to work with viewmodel to get values from Attribute_View 
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -120,7 +119,7 @@ namespace CatalogueMVC.Controllers
         const string _noImage = "no-image.png";
 
         // GET: Books/Create
-        //modified to get lists of Attributes , didtn finished it whole
+        //modified to get lists of Attributes 
         [Authorize]
         public ActionResult Create()
         {
@@ -141,7 +140,8 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] Book book, HttpPostedFileBase file/*, string attText*/)
+        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
+            HttpPostedFileBase file, string attText, int AttributeID,DateTime date)
         {
             try
             {
@@ -162,23 +162,8 @@ namespace CatalogueMVC.Controllers
                         book.Picture = _noImage;
                     }
 
-                    //Extra Attribute part
-
-                    //using (db1)
-                    //{
-                    //    var attBook = new Attribute_Book();
-                    //    var att = new BooksEntitiesDAL.Attribute();
-
-                    //    //trying write some data in Attribute_Book table
-                    //    db1.Attribute_Book.Add(attBook);
-                        
-                    //    attBook.BookID = book.BookID;
-                    //    attBook.AttributeID = att.AttributeID;
-                    //    attBook.ValueTypeText = attText;
-
-                    //}
-
-                    db.Books.Add(book);
+                    var aBook = GetBooks.Create(book, attText, AttributeID,date);
+                    db.Books.Add(aBook);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -309,6 +294,13 @@ namespace CatalogueMVC.Controllers
                     {
                         System.IO.File.Delete(path);
                     }
+                }
+
+                foreach (var item in db.Attribute_Book)
+                {
+                var v1 = db.Attribute_Book.Where(b => b.BookID == book.BookID).FirstOrDefault();
+
+                db.Attribute_Book.Remove(v1);
                 }
 
                 db.Books.Remove(book);

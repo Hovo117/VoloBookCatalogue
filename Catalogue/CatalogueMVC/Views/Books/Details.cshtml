@@ -74,14 +74,12 @@
             @Html.DisplayFor(model => model.PagesCount)
         </dd>
 
-        @*<dt>
+        <dt>
             @Html.DisplayNameFor(model => model.Attribute_Book)
-        </dt>*@
+        </dt>
 
-        @*<dd>
-            @Html.DisplayFor(model => model.Attribute_Book)
-
-            Not fully working part of Attribute_Book
+        <dd>
+            @*@Html.DisplayFor(model => model.Attribute_Book)*@
 
             @{
                 var extAtt = Model.Attribute_Book.FirstOrDefault();
@@ -90,7 +88,7 @@
                     @extAtt.ValueTypeText
                 }
             }
-        </dd>*@
+        </dd>
 
     </dl>
 </div>

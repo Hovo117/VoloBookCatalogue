@@ -1,4 +1,4 @@
-﻿@model BooksEntitiesDAL.Book
+﻿@model CatalogueMVC.BooksViewModel.BookModel
 
 @{
     ViewBag.Title = "Create";
@@ -71,15 +71,16 @@
 
         @*Extra attribute part*@
 
-        @*<div class="form-group">
+        <div class="form-group">
             @Html.LabelFor(model => model.Attribute_Book, "Attributes", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" })
+                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" ,multiple = "multiple" })
                 @Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })
 
-                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText" , style = "display:none;margin-top:10px;border-radius:5px;" , Name = "attText" })
+                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attDate",placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:5px;", Name = "date" })
+                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:5px;" , Name = "attText" })
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -100,7 +101,7 @@
 
     @*hidden input script*@
 
-    @*<script type="text/javascript">
+    <script type="text/javascript">
         $(function () {
             $('#dd1').change(function () {
                 var value = $(this).val();
@@ -109,7 +110,12 @@
                 } else {
                     $('#attText').hide();
                 }
+                if (value == '2') {
+                    $('#attDate').show();
+                } else {
+                    $('#attDate').hide();
+                }
             });
         });
-    </script>*@
+    </script>
 }

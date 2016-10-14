@@ -10,11 +10,6 @@ namespace CatalogueMVC.BooksViewModel
 {
     public class BookModel
     {
-        public BookModel()
-        {
-            this.Attribute_Book = new HashSet<Attribute_Book>();
-        }
-
         public int BookID { get; set; }
 
         [Required(ErrorMessage = "The field Title must be filled")]
@@ -42,7 +37,8 @@ namespace CatalogueMVC.BooksViewModel
 
         public decimal TotalPrice { get; set; }
 
-        public virtual ICollection<Attribute_Book> Attribute_Book { get; set; }
+        public virtual List<Attribute_Book> Attribute_Book { get; set; }
+        public virtual List<BooksEntitiesDAL.Attribute> Attributes { get; set; }
         public virtual Author Author { get; set; }
         public virtual Country Country { get; set; }
     }

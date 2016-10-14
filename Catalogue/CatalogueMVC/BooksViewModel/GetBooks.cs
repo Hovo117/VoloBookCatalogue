@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace CatalogueMVC.BooksViewModel
 {
@@ -27,27 +28,27 @@ namespace CatalogueMVC.BooksViewModel
                     Country = item.Country,
                     Picture = item.Picture,
                     TotalPrice = item.Country.TelCode + item.Price,
-                    Attribute_Book = item.Attribute_Book
+                    Attribute_Book = item.Attribute_Book.ToList()
                 });
             }
             return gr;
         }
 
-        public static Book Create(BookModel model)
+        public static Book Create(BookModel model,string attText,int id,DateTime date)
         {
             Book book = new Book
             {
                 BookID = model.BookID,
                 Title = model.Title,
                 PagesCount = model.PagesCount,
-                Description = model.Description,
+                Description = model.Description, 
                 Price = model.Price,
                 Picture = model.Picture,
                 AuthorID = model.AuthorID,
                 CountryID = model.CountryID,
                 Author = model.Author,
                 Country = model.Country,
-                Attribute_Book = model.Attribute_Book
+                Attribute_Book = new List<Attribute_Book> { new Attribute_Book { BookID = model.BookID, AttributeID = id , ValueTypeText = attText } }
             };
             return book;
         }
@@ -71,6 +72,5 @@ namespace CatalogueMVC.BooksViewModel
             };
             return model;
         }
-
     }
 }
