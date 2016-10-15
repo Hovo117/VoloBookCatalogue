@@ -79,13 +79,12 @@
         </dt>
 
         <dd>
-            @*@Html.DisplayFor(model => model.Attribute_Book)*@
-
             @{
                 var extAtt = Model.Attribute_Book.FirstOrDefault();
                 if (extAtt != null)
                 {
                     @extAtt.ValueTypeText
+                    @extAtt.ValueTypeDate
                 }
             }
         </dd>
