@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
 }
 
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+
 <h2>Add a new Book ...</h2>
 
 @using (Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -74,11 +76,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Attribute_Book, "Attributes", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" @*,multiple = "multiple"*@ })
-                @Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })
+                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new
+           {
+               @class = "form-control",
+               @id = "dd1" @*,multiple = "multiple"*@ })
+                @*@Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })*@
 
-                @*@Html.TextBoxFor(x => x.Attribute_Book, new { id = "attDate",placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:2px;", Name = "date" })*@
-                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:2px;" , Name = "attText" })
+                @Html.TextBoxFor(x => x.Attribute_Book, new { @class = "form-control", id = "attDate", placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:2px;", Name = "date" })
+                @Html.TextBoxFor(x => x.Attribute_Book, new { @class = "form-control", id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:2px;", Name = "attText" })
             </div>
         </div>
 
@@ -98,6 +103,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/imageJs.js"></script>
     <script src="~/Scripts/bootstrap-filestyle.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
 
     @*hidden input script*@
 
@@ -117,5 +123,12 @@
                 }
             });
         });
+
+        $(document).ready(function () {
+            $('#attDate').datepicker({
+                format: "mm/dd/yyyy"
+            });
+        });
+
     </script>
 }
