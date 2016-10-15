@@ -74,11 +74,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Attribute_Book, "Attributes", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" ,multiple = "multiple" })
+                @Html.DropDownList("AttributeID", null, "Select an extra attribute", htmlAttributes: new { @class = "form-control", @id = "dd1" @*,multiple = "multiple"*@ })
                 @Html.ValidationMessageFor(model => model.Attribute_Book, "", new { @class = "text-danger" })
 
-                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attDate",placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:5px;", Name = "date" })
-                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:5px;" , Name = "attText" })
+                @*@Html.TextBoxFor(x => x.Attribute_Book, new { id = "attDate",placeholder = "Published Date", style = "display:none;margin-top:10px;border-radius:2px;", Name = "date" })*@
+                @Html.TextBoxFor(x => x.Attribute_Book, new { id = "attText", placeholder = "Copies", style = "display:none;margin-top:10px;border-radius:2px;" , Name = "attText" })
             </div>
         </div>
 

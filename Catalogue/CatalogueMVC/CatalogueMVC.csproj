@@ -177,7 +177,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="AttBookValueModel\AttBookModel.cs" />
     <Compile Include="BooksViewModel\BookModel.cs" />
     <Compile Include="BooksViewModel\GetBooks.cs" />
     <Compile Include="Controllers\AccountController.cs" />

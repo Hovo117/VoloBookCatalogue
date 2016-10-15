@@ -92,7 +92,7 @@ $(function () {
     });
 
 
-    $('body').on('click', '#GridBooks table .Sort', function (event) {
+    $('body').on('click', '#GridBooks table .aaa', function (event) {
 
         event.preventDefault();
 

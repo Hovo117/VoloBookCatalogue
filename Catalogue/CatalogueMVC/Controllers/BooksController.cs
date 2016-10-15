@@ -53,16 +53,16 @@ namespace CatalogueMVC.Controllers
                         bm = bm.OrderByDescending(p => p.Title).ToList();
                         break;
                     case "author_acs":
-                        bm = bm.OrderBy(p => p.AuthorID).ToList();
+                        bm = bm.OrderBy(p => p.Author.FullName).ToList();
                         break;
                     case "author_desc":
-                        bm = bm.OrderByDescending(p => p.AuthorID).ToList();
+                        bm = bm.OrderByDescending(p => p.Author.FullName).ToList();
                         break;
                     case "country_acs":
-                        bm = bm.OrderBy(p => p.CountryID).ToList();
+                        bm = bm.OrderBy(p => p.Country.Country1).ToList();
                         break;
                     case "country_desc":
-                        bm = bm.OrderByDescending(p => p.CountryID).ToList();
+                        bm = bm.OrderByDescending(p => p.Country.Country1).ToList();
                         break;
                     case "pages_acs":
                         bm = bm.OrderBy(p => p.PagesCount).ToList();
@@ -104,8 +104,7 @@ namespace CatalogueMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.Include(b => b.Attribute_Book).FirstOrDefaultAsync(b => b.BookID == id);
-            //Book book = await db.Books.FindAsync(id);
+            Book book = await db.Books.FindAsync(id);
 
             BookModel model = GetBooks.Details(book);
 
@@ -141,7 +140,7 @@ namespace CatalogueMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
-            HttpPostedFileBase file, string attText, int AttributeID,DateTime date)
+            HttpPostedFileBase file, string attText, int? AttributeID,DateTime? date)
         {
             try
             {
@@ -162,8 +161,8 @@ namespace CatalogueMVC.Controllers
                         book.Picture = _noImage;
                     }
 
-                    var aBook = GetBooks.Create(book, attText, AttributeID,date);
-                    db.Books.Add(aBook);
+                    var mBook = GetBooks.Create(book, attText, AttributeID, date);
+                    db.Books.Add(mBook);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
@@ -195,6 +194,8 @@ namespace CatalogueMVC.Controllers
                 {
                     return HttpNotFound();
                 }
+
+                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
                 return View(book);
@@ -209,7 +210,8 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] Book book, HttpPostedFileBase file)
+        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book, 
+            HttpPostedFileBase file, string attText, int AttributeID, DateTime date)
         {
             try
             {
@@ -240,10 +242,13 @@ namespace CatalogueMVC.Controllers
                         book.Picture = pic;
                     }
 
-                    db.Entry(book).State = EntityState.Modified;
+                    var mBook = GetBooks.Edit(book, attText, AttributeID, date);
+                    db.Entry(mBook).State = EntityState.Modified;
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }
+
+                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
                 ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
                 ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
                 return View(book);
