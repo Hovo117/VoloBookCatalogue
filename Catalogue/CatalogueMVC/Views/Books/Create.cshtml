@@ -127,6 +127,8 @@
         $(document).ready(function () {
             $('#attDate').datepicker({
                 format: "mm/dd/yyyy"
+            }).on('changeDate', function (e) {
+                $(this).datepicker('hide');
             });
         });
 

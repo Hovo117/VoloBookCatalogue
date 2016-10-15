@@ -195,6 +195,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\datepicker.css" />
     <Content Include="Content\Image\bg.jpeg" />
     <Content Include="ErrorPages\WebBadRequest.html" />
     <Content Include="ErrorPages\404.html" />
@@ -222,6 +223,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\no-image.png" />
     <Content Include="Scripts\books.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-filestyle.js" />
     <Content Include="Scripts\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

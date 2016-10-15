@@ -140,7 +140,7 @@ namespace CatalogueMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
-            HttpPostedFileBase file, string attText, int? AttributeID,DateTime? date)
+            HttpPostedFileBase file, string attText, int? AttributeID, DateTime? date)
         {
             try
             {
@@ -183,34 +183,37 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
-            try
+            //try
+            //{
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Book book = await db.Books.FindAsync(id);
-                if (book == null)
-                {
-                    return HttpNotFound();
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Book book = await db.Books.FindAsync(id);
+            if (book == null)
+            {
+                return HttpNotFound();
+            }
 
-                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
-                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-                ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
-                return View(book);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            ViewBag.AttName = db.Attribute_Book.Include(b => b.Attribute).Include(b => b.Book).Where(b => b.BookID == id);
+
+            ViewBag.Attribute_BookID = new SelectList(db.Attribute_Book, "ID", "ValueTypeText", book.Attribute_Book);
+            ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
+            return View(book);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         // POST: Books/Edit/5
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book, 
+        public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
             HttpPostedFileBase file, string attText, int AttributeID, DateTime date)
         {
             try
@@ -303,9 +306,9 @@ namespace CatalogueMVC.Controllers
 
                 foreach (var item in db.Attribute_Book)
                 {
-                var v1 = db.Attribute_Book.Where(b => b.BookID == book.BookID).FirstOrDefault();
+                    var v1 = db.Attribute_Book.Where(b => b.BookID == book.BookID).FirstOrDefault();
 
-                db.Attribute_Book.Remove(v1);
+                    db.Attribute_Book.Remove(v1);
                 }
 
                 db.Books.Remove(book);

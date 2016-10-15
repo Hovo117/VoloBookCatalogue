@@ -73,7 +73,8 @@ namespace CatalogueMVC.BooksViewModel
             return model;
         }
 
-        public static Book Edit(BookModel model, string attText, int id, DateTime date)
+        //Post
+        public static Book Edit(BookModel model, string attText, int? id, DateTime? date)
         {
             Book book = new Book
             {
@@ -87,7 +88,27 @@ namespace CatalogueMVC.BooksViewModel
                 CountryID = model.CountryID,
                 Author = model.Author,
                 Country = model.Country,
-                Attribute_Book = new List<Attribute_Book> { new Attribute_Book { BookID = model.BookID, AttributeID = id, ValueTypeText = attText ,ValueTypeDate = date} }
+                Attribute_Book = new List<Attribute_Book> { new Attribute_Book { BookID = model.BookID, AttributeID = Convert.ToInt32(id), ValueTypeText = attText ,ValueTypeDate = Convert.ToDateTime(date)} }
+            };
+            return book;
+        }
+
+        //Get
+        public static BookModel Edit(Book model, string attText, int? id, DateTime? date)
+        {
+            BookModel book = new BookModel
+            {
+                BookID = model.BookID,
+                Title = model.Title,
+                PagesCount = model.PagesCount,
+                Description = model.Description,
+                Price = model.Price,
+                Picture = model.Picture,
+                AuthorID = model.AuthorID,
+                CountryID = model.CountryID,
+                Author = model.Author,
+                Country = model.Country,
+                Attribute_Book = new List<Attribute_Book> { new Attribute_Book { BookID = model.BookID, AttributeID = Convert.ToInt32(id), ValueTypeText = attText, ValueTypeDate = Convert.ToDateTime(date)} }
             };
             return book;
         }
