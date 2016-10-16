@@ -97,7 +97,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // GET: Books/Details/5
-        //modified details action to work with viewmodel to get values from Attribute_View 
+        //modified details action to work with viewmodel to get values from Attribute_Book 
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -107,6 +107,8 @@ namespace CatalogueMVC.Controllers
             Book book = await db.Books.FindAsync(id);
 
             BookModel model = GetBooks.Details(book);
+
+            ViewBag.AttName = new SelectList(db.Attributes, "AttributeID", "Name");
 
             if (book == null)
             {
@@ -139,43 +141,43 @@ namespace CatalogueMVC.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
-            HttpPostedFileBase file, string attText, int? AttributeID, DateTime? date)
+        public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] BookModel book,
+            HttpPostedFileBase file, string attText, int? AttributeID, DateTime? attDate)
         {
-            try
+            //try
+            //{
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                if (file != null && file.ContentLength > 0)
                 {
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                        WebImage img = new WebImage(file.InputStream);
-                        if (img.Width > 270)
-                            img.Resize(260, 400);
-                        img.Save(path);
-                        book.Picture = fileName;
-                    }
-                    else
-                    {
-                        book.Picture = _noImage;
-                    }
-
-                    var mBook = GetBooks.Create(book, attText, AttributeID, date);
-                    db.Books.Add(mBook);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                    WebImage img = new WebImage(file.InputStream);
+                    if (img.Width > 270)
+                        img.Resize(260, 400);
+                    img.Save(path);
+                    book.Picture = fileName;
+                }
+                else
+                {
+                    book.Picture = _noImage;
                 }
 
-                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
-                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-                ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
-                return View(book);
+                var mBook = GetBooks.Create(book, attText, AttributeID, attDate);
+                db.Books.Add(mBook);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
+            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
+            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
+            return View(book);
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         // GET: Books/Edit/5
@@ -214,7 +216,7 @@ namespace CatalogueMVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture,Attribute_Book")] BookModel book,
-            HttpPostedFileBase file, string attText, int AttributeID, DateTime date)
+            HttpPostedFileBase file, string attText, int? AttributeID, DateTime? date)
         {
             try
             {
@@ -308,6 +310,7 @@ namespace CatalogueMVC.Controllers
                 {
                     var v1 = db.Attribute_Book.Where(b => b.BookID == book.BookID).FirstOrDefault();
 
+                    if(v1 != null)
                     db.Attribute_Book.Remove(v1);
                 }
 

@@ -11,14 +11,17 @@ namespace BooksEntitiesDAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Attribute_Book
     {
         public int ID { get; set; }
         public int BookID { get; set; }
         public int AttributeID { get; set; }
+
         public string ValueTypeText { get; set; }
-        public Nullable<System.DateTime> ValueTypeDate { get; set; }
+
+        public DateTime? ValueTypeDate { get; set; }
     
         public virtual Attribute Attribute { get; set; }
         public virtual Book Book { get; set; }

@@ -8,7 +8,7 @@
     <h2 style="display:inline-block">" @Model.Title "</h2>
     @if (User.Identity.IsAuthenticated)
     {
-            <a title="Edit" href="@Url.Action("Edit",new { id = Model.BookID })" style="margin-left:30px;"><span class="glyphicon glyphicon-pencil l1"></span> </a>
+        <a title="Edit" href="@Url.Action("Edit",new { id = Model.BookID })" style="margin-left:30px;"><span class="glyphicon glyphicon-pencil l1"></span> </a>
     }
 
 </div>
@@ -75,7 +75,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Attribute_Book)
+            @if (Model.Attribute_Book != null)
+            {
+                @ViewBag.AttName
+            }
         </dt>
 
         <dd>
