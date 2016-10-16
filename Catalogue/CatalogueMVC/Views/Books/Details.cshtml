@@ -74,10 +74,15 @@
             @Html.DisplayFor(model => model.PagesCount)
         </dd>
 
+        @*Part for extra attributes doesnt work correct*@
+
         <dt>
             @if (Model.Attribute_Book != null)
             {
-                @ViewBag.AttName
+                foreach (var item in ViewBag.AttName)
+                {
+                    @item
+                }
             }
         </dt>
 

@@ -98,6 +98,7 @@ namespace CatalogueMVC.Controllers
 
         // GET: Books/Details/5
         //modified details action to work with viewmodel to get values from Attribute_Book 
+        //couldnt get the attribute name
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -108,7 +109,7 @@ namespace CatalogueMVC.Controllers
 
             BookModel model = GetBooks.Details(book);
 
-            ViewBag.AttName = new SelectList(db.Attributes, "AttributeID", "Name");
+            ViewBag.AttName = db.Attribute_Book.Include(x => x.Attribute).Include(x=>x.Book).Where(x => x.BookID == id).Select(x => new SelectListItem { Value = x.Attribute.Name });
 
             if (book == null)
             {
@@ -144,44 +145,44 @@ namespace CatalogueMVC.Controllers
         public async Task<ActionResult> Create([Bind(Include = "BookID,Title,AuthorID,CountryID,Price,Description,PagesCount,Picture")] BookModel book,
             HttpPostedFileBase file, string attText, int? AttributeID, DateTime? attDate)
         {
-            //try
-            //{
-            if (ModelState.IsValid)
+            try
             {
-                if (file != null && file.ContentLength > 0)
+                if (ModelState.IsValid)
                 {
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                    WebImage img = new WebImage(file.InputStream);
-                    if (img.Width > 270)
-                        img.Resize(260, 400);
-                    img.Save(path);
-                    book.Picture = fileName;
-                }
-                else
-                {
-                    book.Picture = _noImage;
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+                        WebImage img = new WebImage(file.InputStream);
+                        if (img.Width > 270)
+                            img.Resize(260, 400);
+                        img.Save(path);
+                        book.Picture = fileName;
+                    }
+                    else
+                    {
+                        book.Picture = _noImage;
+                    }
+
+                    var mBook = GetBooks.Create(book, attText, AttributeID, attDate);
+                    db.Books.Add(mBook);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
                 }
 
-                var mBook = GetBooks.Create(book, attText, AttributeID, attDate);
-                db.Books.Add(mBook);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
+                ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
+                ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
+                return View(book);
             }
-
-            ViewBag.AttributeID = new SelectList(db.Attributes, "AttributeID", "Name");
-            ViewBag.AuthorID = new SelectList(db.Authors, "AuthorID", "FullName", book.AuthorID);
-            ViewBag.CountryID = new SelectList(db.Countries, "CountryID", "Country1", book.CountryID);
-            return View(book);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: Books/Edit/5
-
+        //Edit doesnt work for extra attributes
         [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
@@ -212,6 +213,7 @@ namespace CatalogueMVC.Controllers
         }
 
         // POST: Books/Edit/5
+        //Edit doesnt work for extra attributes
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -310,8 +312,8 @@ namespace CatalogueMVC.Controllers
                 {
                     var v1 = db.Attribute_Book.Where(b => b.BookID == book.BookID).FirstOrDefault();
 
-                    if(v1 != null)
-                    db.Attribute_Book.Remove(v1);
+                    if (v1 != null)
+                        db.Attribute_Book.Remove(v1);
                 }
 
                 db.Books.Remove(book);
